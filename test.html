@@ -1,15 +1,200 @@
 <html>
-  <head></head>
-
+  <head>
+    <title>The Coolest Vue - Axios Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
   <body>
-    <button onclick="wave.play()">Play</button>
-    <div id="chart-container" style="width: 100%; height: 100%;"></div>
-    <script src="./public/js/circular-audio-wave.min.js"></script>
+    <div id="app">
+      <input type="text" name="svg" v-model="message" />
+
+      <svg
+        id="svg"
+        version="1.1"
+        baseProfile="full"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        xmlns:ev="http://www.w3.org/2001/xml-events"
+        width="800px"
+        height="400px"
+      >
+        <metadata>
+          <?xpacket begin="" id=""?>
+          <x:xmpmeta xmlns:x="adobe:ns:meta/"
+            ><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+              ><rdf:Description
+                rdf:about=""
+                xmlns:xapRights="http://ns.adobe.com/xap/1.0/rights/"
+                ><xapRights:Marked>True</xapRights:Marked></rdf:Description
+              ><rdf:Description
+                rdf:about=""
+                xmlns:xapRights="http://ns.adobe.com/xap/1.0/rights/"
+                ><xapRights:WebStatement
+                  rdf:resource="http://www.xmple.com/wallpaper/purple-gradient-blue-linear-1920x1080-c2-87cefa-da70d6-a-195-f-14-image/" /></rdf:Description
+              ><rdf:Description
+                rdf:about=""
+                xmlns:xapRights="http://ns.adobe.com/xap/1.0/rights/"
+                ><xapRights:UsageTerms
+                  ><rdf:Alt
+                    ><rdf:li xml:lang="en"
+                      >This work is licensed under a &lt;a rel=&#34;license&#34;
+                      href=&#34;http://creativecommons.org/licenses/by-nc-nd/4.0/&#34;&gt;Creative
+                      Commons Attribution-NonCommercial-NoDerivatives 4.0
+                      International License&lt;/a&gt;.</rdf:li
+                    ></rdf:Alt
+                  ></xapRights:UsageTerms
+                ></rdf:Description
+              ><rdf:Description
+                rdf:about=""
+                xmlns:dc="http://purl.org/dc/elements/1.1/"
+                ><dc:title
+                  ><rdf:Alt><rdf:li xml:lang="en">purple gradient blue linear
+                  light sky blue orchid 1920x1080 #87cefa #da70d6
+                  195°</rdf:li></rdf:Alt></dc:title
+                ></rdf:Description
+              ><rdf:Description
+                rdf:about=""
+                xmlns:cc="http://creativecommons.org/ns#"
+                ><cc:license
+                  rdf:resource="http://creativecommons.org/licenses/by-nc-nd/4.0/" /></rdf:Description
+              ><rdf:Description
+                rdf:about=""
+                xmlns:cc="http://creativecommons.org/ns#"
+                ><cc:attributionName
+                  >xmple.com</cc:attributionName
+                ></rdf:Description
+              ><rdf:Description
+                rdf:about=""
+                xmlns:cc="http://creativecommons.org/ns#"
+                ><cc:morePermissions
+                  rdf:resource="http://www.xmple.com" /></rdf:Description></rdf:RDF></x:xmpmeta
+          ><?xpacket end="r"?>
+        </metadata>
+        <style type="text/css">
+          .x {
+            font: 20px verdana;
+            fill: #fff;
+            stroke: #555;
+            stroke-width: 20px;
+            opacity: 0.35;
+          }
+          .o {
+            stroke: none;
+            opacity: 0.01;
+          }
+        </style>
+        <defs>
+          <linearGradient
+            id="p1"
+            x1="0%"
+            y1="73.817705993878%"
+            x2="100%"
+            y2="26.182294006122%"
+          >
+            <stop offset="0%" style="stop-color: #87cefa; stop-opacity: 1" />
+            <stop offset="100%" style="stop-color: #da70d6; stop-opacity: 1" />
+          </linearGradient>
+        </defs>
+        <rect width="800" height="400" x="0" y="0" fill="#87cefa" />
+        <rect width="800" height="400" x="0" y="0" fill="url(#p1)" />
+        <text
+          x="50%"
+          alignment-baseline="middle"
+          text-anchor="middle"
+          y="50%"
+          id="Test"
+          fill="#fff"
+          class="x o"
+          font-size="60px"
+        >
+          {{message}}
+        </text>
+      </svg>
+
+      <button @click="convert">Convert</button>
+      <canvas id="canvas" width="800" height="400"></canvas>
+      <div v-if="showBtn">
+        <button @click="downloadImage">download</button><br />
+        <button @click="fbShare">Facebook Share</button>
+      </div>
+    </div>
     <script>
-      let wave = new CircularAudioWave(
-        document.getElementById("chart-container")
-      );
-      wave.loadAudio("./public/audio/test.mp3");
+      var app = new Vue({
+        el: "#app",
+        data() {
+          return {
+            message: "hello",
+            image: "",
+            showBtn: false,
+            download: "",
+          };
+        },
+        methods: {
+          convert() {
+            var svgString = new XMLSerializer().serializeToString(
+              document.querySelector("svg")
+            );
+
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            var DOMURL = self.URL || self.webkitURL || self;
+            var img = new Image();
+            var svg = new Blob([svgString], {
+              type: "image/svg+xml;charset=utf-8",
+            });
+            var url = DOMURL.createObjectURL(svg);
+            img.onload = () => {
+              ctx.drawImage(img, 0, 0);
+              var png = canvas.toDataURL("image/png");
+              this.download = png;
+              DOMURL.revokeObjectURL(png);
+              var apiKey = "480bff8602b8ed71fe882dd54ad00fa2";
+              $.post(
+                `https://api.imgbb.com/1/upload?expiration=600&key=${apiKey}`,
+                { image: png.split(",")[1] },
+                (response, status) => {
+                  this.showBtn = true;
+                  this.setImage(response.data.url);
+                }
+              );
+            };
+            img.src = url;
+          },
+          setImage(data) {
+            console.log("setImage -> data", data);
+            this.image = data;
+          },
+          downloadImage() {
+            var download = document.createElement("a");
+            download.href = this.download;
+            console.log("downloadImage -> this.image", this.image);
+            download.download = "test.png";
+            download.click();
+          },
+          fbShare() {
+            t = document.title;
+            window.open(
+              "http://www.facebook.com/sharer.php?u=" +
+                encodeURIComponent(this.image) +
+                "&t=" +
+                encodeURIComponent(t),
+              "sharer",
+              "toolbar=0,status=0,width=626,height=436"
+            );
+            return false;
+          },
+        },
+      });
     </script>
+    <style>
+      #Test {
+        fill: #fff;
+        font-size: 60px;
+      }
+      #svg,
+      #canvas {
+        display: none;
+      }
+    </style>
   </body>
 </html>
