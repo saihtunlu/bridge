@@ -1,0 +1,243 @@
+:root {
+  --vs-warn: 255, 186, 0 !important;
+  --vs-danger: 255, 71, 87 !important;
+  --vs-success: 70, 201, 58 !important;
+  --vs-dark: 18, 18, 18 !important;
+  --vs-gradient-dark: 18, 18, 18 !important;
+  --vs-light: 255, 255, 255 !important;
+  --vs-color: 17, 18, 20 !important;
+  --vs-background: 255, 255, 255 !important;
+  --vs-text: 44, 62, 80 !important;
+  --vs-gray-1: 235, 235, 235 !important;
+  --vs-gray-2: 244, 247, 248 !important;
+  --vs-gray-3: 240, 243, 244 !important;
+  --vs-gray-4: 247, 247, 247 !important;
+}
+
+[vs-theme="dark"] {
+  /* vs ............................ */
+  --vs-background: 30, 32, 35 !important;
+  --vs-text: 255, 255, 255 !important;
+  --vs-gray-1: 30, 30, 30 !important;
+  --vs-gray-2: 20, 20, 23 !important;
+  --vs-gray-3: 15, 16, 19 !important;
+  --vs-gray-4: 10, 11, 14 !important;
+  --vs-light: 30, 30, 30 !important;
+  --vs-shadow-opacity: 0.3 !important;
+  --vs-dark: 240, 240, 240 !important;
+  --vs-background-opacity: 0.6 !important;
+}
+.div-divider {
+  border-bottom-left-radius: 50% 15%;
+  border-bottom-right-radius: 50% 15%;
+}
+
+.bx {
+  font-size: 20px;
+}
+.ball i.bx {
+  font-size: 35px !important;
+  color: #fff;
+  position: absolute;
+  z-index: 1000;
+}
+.ball {
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  z-index: 100;
+  border-radius: 100%;
+  top: calc(50vh - 50px);
+  right: calc(50vw - 50px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div#app {
+  background: rgba(var(--vs-gray-1)) !important;
+}
+.primaryHover:hover {
+  box-shadow: 0px 4px 25px -8px rgba(var(--vs-primary), 0.2);
+}
+.primary {
+  color: rgb(var(--vs-primary)) !important;
+}
+.primary-bg {
+  background: rgb(var(--vs-primary)) !important;
+}
+.dark {
+  color: rgb(var(--vs-dark)) !important;
+}
+.dark-bg {
+  background: rgb(var(--vs-dark)) !important;
+}
+.warning {
+  color: rgb(var(--vs-warning)) !important;
+}
+.success {
+  color: rgb(var(--vs-success)) !important;
+}
+.danger {
+  color: rgb(var(--vs-danger)) !important;
+}
+.gray {
+  color: rgb(var(--vs-dark), 0.5) !important;
+}
+
+.open-icon {
+  animation: openicon 0.25s !important;
+}
+
+/* ------------------------------------------------'mobile'------------------------------------------------ */
+@media screen and (max-width: 600px) {
+  header.header-table.vs-table--header {
+    padding: 5px !important;
+  }
+  input.vs-inputx.vs-input--input,
+  input.input-select {
+    height: 40px !important;
+  }
+  .vs-input--label,
+  label.vs-select--label {
+    font-size: 12px !important;
+  }
+  input.vs-input-number--input {
+    min-width: 20px !important;
+    padding: 0px !important;
+  }
+  .big-radius {
+    border-radius: 25px;
+  }
+  .medium-radius {
+    border-radius: 15px;
+  }
+  .small-radius {
+    border-radius: 10px;
+  }
+  .mainFooter {
+    justify-content: center !important;
+  }
+  .svgImage {
+    width: 50% !important;
+  }
+  .router_view {
+    padding-top: 70px !important;
+  }
+  .text {
+    font-size: 27px !important;
+  }
+  .sm-text {
+    font-size: 1.5rem !important;
+  }
+  html {
+    font-size: 12px;
+  }
+
+  .base-padding {
+    padding: 0px 15px !important;
+  }
+  .mt-base {
+    margin-top: 20px !important;
+  }
+  .mt-medium {
+    margin-top: 15px !important;
+  }
+}
+
+/* ------------------------------------------------'tablet'------------------------------------------------ */
+@media screen and (min-width: 600px) and (max-width: 992px) {
+  .big-radius {
+    border-radius: 25px;
+  }
+  .medium-radius {
+    border-radius: 15px;
+  }
+  .small-radius {
+    border-radius: 10px;
+  }
+  .svgImage {
+    width: 40% !important;
+  }
+  .router_view {
+    padding-top: 70px !important;
+  }
+  .header {
+    font-size: 2.2rem !important;
+  }
+  .caption {
+    font-size: 1.8rem !important;
+  }
+  html {
+    font-size: 14px;
+  }
+  .sm-text,
+  .con-vs-chip {
+    font-size: 12px !important;
+  }
+  input.vs-inputx.vs-input--input,
+  .vs-con-table td,
+  .normal-text,
+  .con-content--item,
+  .shadowBtn {
+    font-size: 14px !important;
+  }
+  .base-padding {
+    padding: 0px 15px !important;
+  }
+  .mt-base {
+    margin-top: 50px !important;
+  }
+  .mt-medium {
+    margin-top: 20px !important;
+  }
+}
+
+/* ------------------------------------------------"desktop"------------------------------------------------ */
+@media (min-width: 992px) {
+  .big-radius {
+    border-radius: 30px;
+  }
+  .medium-radius {
+    border-radius: 15px;
+  }
+  .small-radius {
+    border-radius: 10px;
+  }
+  .svgImage {
+    width: 30% !important;
+  }
+  .router_view {
+    padding-top: 70px;
+  }
+
+  input.vs-inputx.vs-input--input,
+  .vs-con-table td,
+  .normal-text,
+  .con-content--item,
+  .shadowBtn {
+    font-size: 16px !important;
+  }
+  .header {
+    font-size: 2.5rem !important;
+  }
+  .caption {
+    font-size: 1.5rem !important;
+  }
+  html {
+    font-size: 16px;
+  }
+  .sm-text,
+  .con-vs-chip {
+    font-size: 14px !important;
+  }
+  .base-padding {
+    padding: 0px 30px !important;
+  }
+  .mt-base {
+    margin-top: 100px !important;
+  }
+  .mt-medium {
+    margin-top: 30px !important;
+  }
+}
