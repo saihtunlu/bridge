@@ -1,6 +1,8 @@
-import projects from "../constants/projects";
 export default {
-  projects: projects,
-  screenType: null,
+  posts: [],
+  page: 1,
+  next: null,
   release: false,
+  showSwitcher: false,
+  lang: "mm",
 };

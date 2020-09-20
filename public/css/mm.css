@@ -1,7 +1,0 @@
-@font-face {
-  font-family: "W42Art";
-  src: local("W42Art"), url("../fonts/W42Art.ttf") format("truetype");
-}
-* {
-  font-family: "W42Art", sans-serif !important;
-}

@@ -2,42 +2,113 @@
   <div
     id="app"
     style="min-height: 100vh"
+    @wheel="OnWheel"
     class="container-fluid"
-    v-bind:style="{ cursor: selectedCursor }"
   >
-    <Countdown v-if="!release" />
-    <router-view :key="$route.fullPath" v-else />
+    <Switcher v-if="showSwitcher" />
+    <Countdown v-if="release && !showSwitcher" />
+    <Flipper :flip-key="$route.fullPath" stagger="gentle">
+      <router-view
+        :key="$route.fullPath"
+        :scrollPosition="scroll"
+        v-if="!release && !showSwitcher"
+      />
+    </Flipper>
   </div>
 </template>
 
 <script>
+import { Flipper } from "vue-flip-toolkit";
 import Countdown from "./screens/countdown";
+import Switcher from "./screens/switcher";
 import "hooper/dist/hooper.css";
 import { mapGetters, mapState } from "vuex";
 export default {
   data() {
     return {
-      selectedCursor: `url("data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='gray' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' class='feather feather-disc'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Ccircle cx='12' cy='12' r='3'%3E%3C/circle%3E%3C/svg%3E"), pointer`,
+      scroll: [{}],
     };
   },
-  created() {
-    window.scrollTo(0, 0);
-    // Create new link Element
-    var link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.type = "text/css";
-    link.href = "css/mm.css";
-    document.head.appendChild(link);
-  },
-
   components: {
     Countdown,
+    Switcher,
+    Flipper,
   },
-  mounted() {},
+  created() {
+    const check = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("lang"))
+      .split("=")[1];
+    if (check) {
+      console.log("created -> check", check);
+      this.$store.commit("setLang", check);
+      this.$store.commit("setShowSwitcher", false);
+      this.$i18n.locale = check;
+    } else {
+      this.$store.commit("setShowSwitcher", true);
+    }
+
+    window.addEventListener("DOMMouseScroll", this.detectMouseWheelDirection);
+
+    this.$store.dispatch("getPosts", { page: 1 });
+  },
   computed: {
     ...mapGetters({}),
-    ...mapState(["release"]),
+    ...mapState(["release", "showSwitcher"]),
+    key() {
+      return this.$route.path;
+    },
   },
-  methods: {},
+  methods: {
+    OnWheel(event) {
+      const deltaY = event.deltaY;
+      if (deltaY > 0) {
+        this.scroll = [
+          {
+            key: new Date(),
+            data: "top",
+          },
+        ];
+      } else {
+        this.scroll = [
+          {
+            key: new Date(),
+            data: "bottom",
+          },
+        ];
+      }
+    },
+  },
 };
 </script>
+<style>
+.slither-enter-active,
+.slither-leave-active {
+  transition: transform 1s;
+}
+
+.slither-enter,
+.slither-leave-to {
+  transform: translateX(-100%);
+}
+
+.slither-enter-to,
+.slither-leave {
+  transform: translateX(0);
+}
+
+.drain-enter-active,
+.drain-leave-active {
+  transition: transform 1s;
+}
+
+.drain-enter,
+.drain-leave-to {
+  transform: translateY(100%);
+}
+
+.drain-enter-to,
+.drain-leave {
+  transform: translateY(0);
+}
+</style>

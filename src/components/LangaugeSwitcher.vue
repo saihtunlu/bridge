@@ -1,55 +1,32 @@
 <template>
-  <div></div>
+  <div class="flex-align-center">
+    <p class="white text mr-5 pr-4" @click="changeLang('mm')">MM</p>
+    <span class="side-divider"></span>
+    <p class="white text ml-5 pl-4" @click="changeLang('en')">EN</p>
+  </div>
 </template>
 
 <script>
-const langs = [
-  {
-    value: "mm",
-    label: "မြန်မာ",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Flag_of_Myanmar.svg/320px-Flag_of_Myanmar.svg.png",
-  },
-  {
-    value: "en",
-    label: "English",
-    image:
-      "https://cdn10.bigcommerce.com/s-hhbbk/products/2194/images/43897/UnionJack__45568.1580477840.1280.1280.png",
-  },
-];
 export default {
   data() {
-    return {
-      lang: "en",
-      langs: langs,
-      selected: langs[1],
-    };
+    return {};
   },
-  created() {
-    var check = localStorage.getItem("lang");
-    if (check) {
-      // Create new link Element
-      var link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.type = "text/css";
-      link.href = "css/mm.css";
-      document.head.appendChild(link);
-      this.$i18n.locale = check;
-      this.lang = check;
-      this.selected = langs.filter((data) => {
-        return data.value === check;
-      })[0];
-    }
-  },
+  created() {},
   methods: {
     changeLang(data) {
-      this.selected = data;
-      this.lang = data.value;
-      var lang = data.value;
-      if (lang) {
-        this.$i18n.locale = lang;
-        localStorage.setItem("lang", lang);
+      if (data) {
+        this.$i18n.locale = data;
+        this.$store.commit("setLang", data);
+        this.$store.commit("setShowSwitcher", false);
+        this.setCookie(data);
       }
+    },
+    setCookie(data) {
+      var now = new Date();
+      var minutes = 1;
+      now.setTime(now.getTime() + minutes * 60 * 1000);
+      document.cookie = "lang=" + data;
+      document.cookie = "expires=" + now.toUTCString() + ";";
     },
   },
 };
