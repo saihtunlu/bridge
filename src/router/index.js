@@ -6,12 +6,24 @@ import Wall from "../screens/wall.vue";
 import Home from "../screens/home.vue";
 import Admin from "../screens/admin.vue";
 import Login from "../screens/login.vue";
+import Stories from "../screens/stories.vue";
+import Audio from "../screens/audio.vue";
 
 const routes = [
   {
     path: "/wall",
     name: "Wall",
     component: Wall,
+  },
+  {
+    path: "/audio",
+    name: "Audio",
+    component: Audio,
+  },
+  {
+    path: "/stories",
+    name: "Stories",
+    component: Stories,
   },
   {
     path: "/",

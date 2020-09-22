@@ -22,4 +22,7 @@ export default {
   setNewPost(state, data) {
     state.posts.splice(data.index, 0, data.data);
   },
+  setPlaying(state, data) {
+    state.playing = data;
+  },
 };

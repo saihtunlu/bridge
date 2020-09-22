@@ -6,82 +6,121 @@
     :spring="{ stiffness: 50, damping: 15 }"
     style="height:100vh;overflow:hidden;"
   >
-    <MenuBtn />
-    <!-- Section 1 & 2 -->
     <div
-      class="col-12 p-0 flex-column flex-x-between"
-      v-if="show === 'section1' || show === 'section2'"
+      class="fix-position flex-column flex-x-between"
+      style="z-index:1000;padding-top:0.3rem;padding-bottom:30px;"
     >
-      <div class="w-100" style="z-index:1;">
-        <div class="div-header div-divider" style="z-index:1002;">
-          <div class="flex-column w-100 side-padding">
-            <div
-              class="flex-end w-100 flex-align-center"
-              style="margin-bottom:2rem;"
-            >
-              <div class="flex-align-center flex-end">
-                <img
-                  src="/image/logo.png"
-                  width="200px"
-                  style=" z-index: 1001;"
-                />
-                <Flipped
-                  flip-id="circle"
-                  style="position:absolute"
-                  v-if="show === 'section2'"
-                >
-                  <div
-                    class="dot logo-dot"
-                    style="position:absolute;z-index:999;"
-                  ></div>
-                </Flipped>
-                <div
-                  class="dot logo-dot"
-                  style="position:absolute;width: 44px!important;
-    height: 44px!important;z-index:1000;background:#efefef !important;"
-                ></div>
-              </div>
-            </div>
-            <p class="primary sm-text text-center">
-              {{ $t("countdown-subtitle") }}
-            </p>
-          </div>
-        </div>
-
-        <slide-y-up-transition :duration="1000">
-          <div
-            style="z-index:1;"
-            v-if="showFirstText"
-            class="sec-roll1-section primary-bg div-divider"
+      <div class="flex-center">
+        <vs-button
+          v-if="show !=='section1'"
+          class="fade-down"
+          circle
+          @click="swipe('bottom')"
+          transparent
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            :stroke="upColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-chevrons-up"
           >
-            <p
-              style=" color:#fff; text-align:center;padding:0px 30px"
-              class="text"
-            >
-              {{ $t("roll1-first-text") }}
-            </p>
-          </div>
-        </slide-y-up-transition>
+            <polyline points="17 11 12 6 7 11" />
+            <polyline points="17 18 12 13 7 18" />
+          </svg>
+        </vs-button>
       </div>
-      <div class="sec-roll3-section">
-        <slide-y-up-transition :duration="1000">
-          <p
-            v-if="!showFirstText"
-            style=" color:#fff; margin-top:200px; text-align:center;padding:0px 30px;"
-            class="text"
+      <div class="flex-center">
+        <vs-button
+          circle
+          v-if="show !=='section10'"
+          class="fade-up"
+          @click="swipe('top')"
+          transparent
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            :stroke="downColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-chevrons-down"
           >
-            {{ $t("roll1-second-text") }}
-          </p>
-        </slide-y-up-transition>
+            <polyline points="7 13 12 18 17 13" />
+            <polyline points="7 6 12 11 17 6" />
+          </svg>
+        </vs-button>
       </div>
     </div>
-    <!-- End Of Section 1 & 2 -->
+    <MenuBtn :color="menuColor" />
+    <!-- Section 1 -->
+    <div class="col-12 p-0 flex-column flex-x-between" v-if="show === 'section1' ">
+      <!-- <Flipped flip-id="circle"> -->
+      <div class="circle-bg" style="background:#efefef;z-index:1;" id="first-section"></div>
+      <!-- </Flipped> -->
+      <div class="w-100" style="z-index:1;">
+        <div class="flex-column w-100 side-padding">
+          <div class="flex-end w-100 flex-align-center" style="margin-bottom:2rem;">
+            <div class="flex-align-center flex-end">
+              <img src="/image/logo.png" class="logo mt-3" width="200px" style=" z-index: 1001;" />
+              <Flipped flip-id="circle" style="position:absolute">
+                <div class="dot logo-dot" style="position:absolute;z-index:999;"></div>
+              </Flipped>
+              <div
+                class="dot logo-dot"
+                style="position:absolute;width: 43px!important;
+    height: 42px!important;right:21px !important;top:15px !important; z-index:1000;background:#efefef !important;"
+              ></div>
+            </div>
+          </div>
+          <p class="primary sm-text text-center">{{ $t("countdown-subtitle") }}</p>
+        </div>
+
+        <div style="z-index:1;" class="sec-roll1-section animated fadeIn route-delay mt-0">
+          <p
+            style=" color:#fff; text-align:center;padding:0px 30px"
+            class="text"
+          >{{ $t("roll1-first-text") }}</p>
+        </div>
+      </div>
+      <div class="sec-roll3-section">
+        <img src="image/section1.png" width="100%" alt />
+      </div>
+    </div>
+    <!-- End Of Section 1  -->
+    <!-- Section 2 -->
+    <div class="col-12 p-0 flex-column page-padding flex-x-between" v-if="show === 'section2' ">
+      <Flipped flip-id="circle">
+        <div class="circle-bg primary-bg overflow-hidden" id="section-section">
+          <img src="image/section2.png" width="100%" class="animated fadeIn" alt />
+        </div>
+      </Flipped>
+      <div class="w-100" style="z-index:1;">
+        <div
+          style="z-index:1;"
+          v-if="show === 'section2' "
+          class="sec-roll1-section animated fadeIn route-delay"
+        >
+          <p
+            style=" color:#fff;width:70%; text-align:center;"
+            class="text mx-auto"
+          >{{ $t("roll1-second-text") }}</p>
+        </div>
+      </div>
+    </div>
+    <!-- End Of Section 2 -->
 
     <!-- Section 3 -->
-    <div
-      class="col-12 flex-column flex-x-between page-padding"
-      v-if="show === 'section3'"
-    >
+    <div class="col-12 flex-column flex-x-between page-padding" v-if="show === 'section3'">
       <Flipped flip-id="circle" v-if="show === 'section3'">
         <div class="ball"></div>
       </Flipped>
@@ -89,43 +128,33 @@
         <span class="primary">{{ $t("purple") }}</span>
         <span class="text-animated">{{ $t("roll2-text") }}</span>
       </p>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="animated fadeIn"
-        width="50"
-        height="50"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M18.707 12.707L17.293 11.293 13 15.586 13 6 11 6 11 15.586 6.707 11.293 5.293 12.707 12 19.414z"
-        />
-      </svg>
     </div>
     <!-- End of section 3 -->
 
     <!-- Section 4 -->
     <div
-      class="col-12 roll3 animated fadeIn page-padding flex-column flex-x-between"
+      class="col-12 primary-bg page-padding animated fadeIn flex-column flex-x-between"
       v-if="show === 'section4'"
     >
-      <p class="text text-center white">
-        {{ $t("audio1") }}
-        <br />
-        {{ $t("audio-file") }}
-      </p>
-      <div class="flex-center flex-column side-padding">
+      <div class="circle-bg gray-pg overflow-hidden">
+        <img src="image/section3.png" alt />
+      </div>
+      <div style="z-index:1000;" class="flex-center flex-column">
+        <p class="text text-center primary">
+          {{ $t("audio1") }}
+          <br />
+          {{$t('audio-file')}}
+        </p>
         <p
-          class="white sm-text text-center px-4 mb-3"
+          class="primary sm-text text-center px-4 mb-3"
           v-if="!play"
           style="font-size:14px;"
-        >
-          {{ $t("play") }}
-        </p>
-        <img src="image/c.png" class="rmb-5" alt />
-        <p class="text text-center mt-0 white text-width text-animated2">
-          {{ $t("countdown-subtitle") }}
-          {{ $t("countdown-subtitle") }}
-        </p>
+        >{{ $t("play") }}</p>
+        <p
+          id="subtitles"
+          class="sm-text audio-text w-100 my-0 text-center primary"
+          :class="showSubtitle ? '' : 'hidden'"
+        ></p>
       </div>
     </div>
 
@@ -149,21 +178,15 @@
           :key="ball + n"
         ></div>
       </div>
-      <div
-        class="roll4-content animated fadeIn page-padding flex-x-between flex-column"
-      >
+      <div class="roll4-content animated fadeIn page-padding flex-x-between flex-column">
         <p
           class="text text-center white"
           style="width:80%;margin-left:auto;margin-right:auto"
-        >
-          {{ $t("roll4-title") }}
-        </p>
+        >{{ $t("roll4-title") }}</p>
         <p
           class="text text-center white"
           style="width:80%;margin-left:auto;margin-right:auto;margin-bottom:5rem"
-        >
-          {{ $t("roll4-subtitle") }}
-        </p>
+        >{{ $t("roll4-subtitle") }}</p>
       </div>
       <div class="ball animated fadeIn addBorder route-delay"></div>
     </div>
@@ -171,27 +194,28 @@
 
     <!-- section 6 -->
     <div
-      class="col-12 roll5 page-padding flex-column flex-x-between animated fadeIn"
+      class="col-12 primary-bg page-padding animated fadeIn flex-column flex-x-between"
       v-if="show === 'section6'"
     >
-      <p class="text text-center white">
-        {{ $t("audio2") }}
-        <br />
-        {{ $t("audio-file") }}
-      </p>
-      <div class="flex-center flex-column side-padding">
+      <div class="circle-bg gray-pg overflow-hidden">
+        <img src="image/section6.png" alt />
+      </div>
+      <div style="z-index:1000;" class="flex-center flex-column">
+        <p class="text text-center primary">
+          {{ $t("audio2") }}
+          <br />
+          {{$t('audio-file')}}
+        </p>
         <p
-          class="white sm-text text-center px-4 mb-3"
+          class="primary sm-text text-center px-4 mb-3"
           v-if="!play"
           style="font-size:14px;"
-        >
-          {{ $t("play") }}
-        </p>
-        <img src="image/c.png" class="rmb-5" alt />
-        <p class="text text-center mt-0 white text-animated2 text-width">
-          {{ $t("countdown-subtitle") }}
-          {{ $t("countdown-subtitle") }}
-        </p>
+        >{{ $t("play") }}</p>
+        <p
+          id="subtitles"
+          class="sm-text audio-text w-100 my-0 text-center primary"
+          :class="showSubtitle ? '' : 'hidden'"
+        ></p>
       </div>
     </div>
     <!-- end of section 6 -->
@@ -200,22 +224,16 @@
       <Flipped flip-id="circle" v-if="show === 'section7'">
         <div class="primary-bg circle-bg"></div>
       </Flipped>
-      <div
-        class="roll6-content flex-x-between page-padding animated fadeIn flex-column"
-      >
+      <div class="roll6-content flex-x-between page-padding animated fadeIn flex-column">
         <div>
           <p
             class="text text-center white text-animated"
             style="width:80%;margin-left:auto;margin-right:auto"
-          >
-            {{ $t("roll6-title") }}
-          </p>
+          >{{ $t("roll6-title") }}</p>
           <p
             class="white text-center pt-lg-0 animated text-animated2 fadeIn xs-text"
             style="width:90%;margin-left:auto;margin-right:auto;"
-          >
-            (pg. 11, 60 Gender and Politics in Myanmar, GEN)
-          </p>
+          >(pg. 11, 60 Gender and Politics in Myanmar, GEN)</p>
         </div>
       </div>
 
@@ -244,35 +262,33 @@
 
     <!-- section 8 -->
     <div
+      class="col-12 primary-bg page-padding animated fadeIn flex-column flex-x-between"
       v-if="show === 'section8'"
-      class="col-12 roll7 page-padding animated fadeIn flex-column flex-x-between"
     >
-      <p class="text text-center white" style="width:80%">
-        {{ $t("audio3") }}
-        <br />
-        {{ $t("audio-file") }}
-      </p>
-      <div class="flex-center flex-column side-padding">
+      <div class="circle-bg gray-pg overflow-hidden">
+        <img src="image/section8.png" alt />
+      </div>
+      <div style="z-index:1000;" class="flex-center flex-column">
+        <p class="text text-center primary" style="width:75%">
+          {{ $t("audio3") }}
+          <br />
+          {{$t('audio-file')}}
+        </p>
         <p
-          class="white sm-text text-center px-4 mb-3"
+          class="primary sm-text text-center px-4 mb-3"
           v-if="!play"
           style="font-size:14px;"
-        >
-          {{ $t("play") }}
-        </p>
-        <img src="image/c.png" class="rmb-5" alt />
-        <p class="text text-center mt-0 white text-animated2 text-width">
-          {{ $t("countdown-subtitle") }}
-          {{ $t("countdown-subtitle") }}
-        </p>
+        >{{ $t("play") }}</p>
+        <p
+          id="subtitles"
+          class="sm-text audio-text w-100 my-0 text-center primary"
+          :class="showSubtitle ? '' : 'hidden'"
+        ></p>
       </div>
     </div>
     <!-- end of section 8 -->
     <!-- section 9 -->
-    <div
-      class="ball animated bounceIn addBorder route-delay"
-      v-if="show === 'section9'"
-    ></div>
+    <div class="ball animated bounceIn addBorder route-delay" v-if="show === 'section9'"></div>
     <div class="col-12 flex-center" v-if="show === 'section9'">
       <Flipped flip-id="circle">
         <div class="primary-bg circle-bg" style="bottom:25vh !important"></div>
@@ -284,9 +300,7 @@
           <p
             class="text text-center white text-animated"
             style="width:80%;margin-left:auto;margin-right:auto"
-          >
-            {{ $t("roll8-title") }}
-          </p>
+          >{{ $t("roll8-title") }}</p>
           <p
             class="white text-center xs-text animated text-animated2 fadeIn"
             style="width:90%;margin-left:auto;margin-right:auto;"
@@ -306,34 +320,34 @@
       <div class="ball" />
     </Flipped>
     <div class="ball" v-if="show === 'section10'">
-      <img
-        src="image/support.png"
+      <svg
         @click="$router.push({ name: 'Wall', params: { show: true } })"
-        alt
-      />
+        xmlns="http://www.w3.org/2000/svg"
+        width="60"
+        height="60"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="feather feather-arrow-right"
+      >
+        <line x1="5" y1="12" x2="19" y2="12" />
+        <polyline points="12 5 19 12 12 19" />
+      </svg>
       <p
         class="sm-text text-center ex-text px-4"
-        style="position: absolute;
-        top: 150px;"
-      >
-        {{ $t("show-your-support") }}
-      </p>
+        style="position: absolute;top: 150px;"
+      >{{ $t("show-your-support") }}</p>
     </div>
-    <div
-      class="col-12 primary-bg animated fadeIn flex-center"
-      v-if="show === 'section10'"
-    >
-      <div
-        class="circle-bg"
-        style="bottom:25vh !important;background:#efefef !important;"
-      ></div>
+    <div class="col-12 primary-bg animated fadeIn flex-center" v-if="show === 'section10'">
+      <div class="circle-bg" style="bottom:25vh !important;background:#efefef !important;"></div>
       <div class="roll8-content page-padding flex-x-between flex-column">
         <p
           class="text text-center text-animated"
           style="width:75%;margin-left:auto;margin-right:auto"
-        >
-          {{ $t("roll9-title") }}
-        </p>
+        >{{ $t("roll9-title") }}</p>
       </div>
       <footerFB />
     </div>
@@ -352,10 +366,7 @@
     min-width: 144px;
     overflow: visible;"
         >
-          <div
-            id="audio-wave"
-            style="min-width: 450px !important; height: 450px !important;"
-          ></div>
+          <div id="audio-wave" style="min-width: 450px !important; height: 450px !important;"></div>
           <div
             class="audio-control animated bounceIn px-2"
             style="width:144px;height:144px;border-radius:100%;overflow:hidden;animation-delay:1800ms"
@@ -365,8 +376,8 @@
               @click="PlayAudio()"
               v-if="!play"
               xmlns="http://www.w3.org/2000/svg"
-              width="35"
-              height="35"
+              width="45"
+              height="45"
               viewBox="0 0 23 25"
             >
               <path
@@ -382,8 +393,8 @@
               xmlns="http://www.w3.org/2000/svg"
               @click="stopAudio()"
               v-if="play"
-              width="30"
-              height="30"
+              width="40"
+              height="40"
               viewBox="0 0 20 22"
             >
               <g
@@ -396,33 +407,14 @@
                 stroke-width="1"
               >
                 <rect width="20" height="22" rx="4" stroke="none" />
-                <rect
-                  x="0.5"
-                  y="0.5"
-                  width="19"
-                  height="21"
-                  rx="3.5"
-                  fill="none"
-                />
+                <rect x="0.5" y="0.5" width="19" height="21" rx="3.5" fill="none" />
               </g>
             </svg>
           </div>
         </div>
-        <p
-          id="subtitles"
-          class="sm-text audio-text my-0 text-center white"
-          :class="showSubtitle ? '' : 'hidden'"
-        ></p>
       </div>
     </Flipped>
-    <audio
-      style="width:100%;"
-      class="hidden"
-      ref="audio"
-      :src="audio"
-      id="audio"
-      controls
-    />
+    <audio style="width:100%;" class="hidden" ref="audio" :src="audio" id="audio" controls />
   </Flipper>
 </template>
 
@@ -436,32 +428,32 @@ import footerFB from "../components/footerFB";
 
 const balls = [
   {
-    top: "0px",
+    top: "30px",
     right: "",
-    left: "-20px",
+    left: "50px",
   },
   {
-    top: "120px",
+    top: "180px",
     right: "",
-    left: "10px",
+    left: "-10px",
   },
   {
-    top: "20px ",
-    right: "120px ",
+    top: "45px ",
+    right: "60px ",
     left: "",
   },
   {
-    top: "100px",
-    right: "30px ",
+    top: "140px",
+    right: "-15px ",
     left: "",
   },
   {
-    top: "250px",
-    right: "60px",
+    top: "260px",
+    right: "30px",
     left: "",
   },
   {
-    top: "300px ",
+    top: "275px ",
     right: "",
     left: "140px ",
   },
@@ -476,6 +468,9 @@ export default {
   },
   data() {
     return {
+      upColor: "rgb(var(--vs-primary))",
+      downColor: "#fff",
+      menuColor: "rgb(var(--vs-primary))",
       balls: balls,
       show: "section1",
       showFirstText: true,
@@ -514,7 +509,7 @@ export default {
                 offsetY: 140,
                 fontSize: "20px",
                 color: "#fff",
-                formatter: function(val) {
+                formatter: function (val) {
                   return val + "%";
                 },
               },
@@ -536,7 +531,7 @@ export default {
                 offsetY: 140,
                 fontSize: "20px",
                 color: "#fff",
-                formatter: function(val) {
+                formatter: function (val) {
                   return val + "%";
                 },
               },
@@ -583,15 +578,23 @@ export default {
     },
     show(value) {
       if (value === "section1") {
-        console.log("show -> value", value);
+        this.menuColor = "rgb(var(--vs-primary))";
+        this.downColor = "#fff";
       }
       if (value === "section2") {
-        console.log("show -> value", value);
+        this.menuColor = "#fff";
+        this.downColor = "#fff";
+        this.upColor = "#fff";
       }
       if (value === "section3") {
-        console.log("show -> value", value);
+        this.menuColor = "rgb(var(--vs-primary))";
+        this.downColor = "rgb(var(--vs-primary))";
+        this.upColor = "rgb(var(--vs-primary))";
       }
       if (value === "section4") {
+        this.downColor = "#fff";
+        this.upColor = "rgb(var(--vs-primary))";
+        this.menuColor = "rgb(var(--vs-primary))";
         this.audio = "audio/MIB2.mp4";
         this.subtitle =
           this.lang === "mm"
@@ -599,12 +602,17 @@ export default {
             : "http://localhost:8080/audio/en-subtitle.vtt";
         setTimeout(() => {
           this.initAudio();
-        }, 800);
+        }, 1000);
       }
       if (value === "section5") {
-        console.log("show -> value", value);
+        this.downColor = "#fff";
+        this.upColor = "#fff";
+        this.menuColor = "#fff";
       }
       if (value === "section6") {
+        this.downColor = "rgb(var(--vs-primary))";
+        this.upColor = "rgb(var(--vs-primary))";
+        this.menuColor = "rgb(var(--vs-primary))";
         this.audio = "audio/10000_hour.mp3";
         this.subtitle =
           this.lang === "mm"
@@ -612,14 +620,20 @@ export default {
             : "http://localhost:8080/audio/mm-subtitle.vtt";
         setTimeout(() => {
           this.initAudio();
-        }, 800);
+        }, 1000);
       }
       if (value === "section7") {
+        this.downColor = "#fff";
+        this.upColor = "#fff";
+        this.menuColor = "#fff";
         setTimeout(() => {
           this.showChart = true;
         }, 1300);
       }
       if (value === "section8") {
+        this.downColor = "rgb(var(--vs-primary))";
+        this.upColor = "rgb(var(--vs-primary))";
+        this.menuColor = "rgb(var(--vs-primary))";
         this.audio = "audio/MIB2.mp4";
         this.subtitle =
           this.lang === "mm"
@@ -627,13 +641,16 @@ export default {
             : "http://localhost:8080/audio/en-subtitle.vtt";
         setTimeout(() => {
           this.initAudio();
-        }, 800);
+        }, 1000);
       }
       if (value === "section9") {
-        console.log("show -> value", value);
+        this.downColor = "#fff";
+        this.upColor = "#fff";
+        this.menuColor = "#fff";
       }
       if (value === "section10") {
-        console.log("show -> value", value);
+        this.upColor = "rgb(var(--vs-primary))";
+        this.menuColor = "rgb(var(--vs-primary))";
       }
     },
   },
@@ -644,17 +661,17 @@ export default {
     // Global Functions
 
     swipe(e) {
-      if (this.show === "section1" || this.show === "section2") {
+      if (this.show === "section1") {
         if (e === "top") {
-          if (this.showFirstText) {
-            this.show = "section2";
-            this.showFirstText = false;
-          } else {
-            this.show = "section3";
-          }
+          this.show = "section2";
+        }
+      } else if (this.show === "section2") {
+        if (e === "top") {
+          this.show = "section3";
         }
         if (e === "bottom") {
-          this.showFirstText = true;
+          this.showFirstText = false;
+          this.show = "section1";
         }
       } else if (this.show === "section3") {
         if (e === "top") {
@@ -744,7 +761,10 @@ export default {
         subtitlesFile: this.subtitle, // the path to the vtt file
       });
       var CircularAudioWave = window.CircularAudioWave;
-      this.wave = new CircularAudioWave(document.getElementById("audio-wave"));
+      this.wave = new CircularAudioWave(
+        document.getElementById("audio-wave"),
+        ""
+      );
       this.wave.onAudioEnded = () => {
         this.showSubtitle = false;
         this.play = false;
@@ -765,5 +785,21 @@ export default {
   position: absolute;
   width: 320px;
   top: 200px;
+}
+
+div#first-section {
+  background: rgb(239, 239, 239);
+  z-index: 1;
+  bottom: calc(100vh - 180px);
+}
+.circle-bg img {
+  width: 100vw;
+  margin: 0px auto;
+  position: absolute;
+  bottom: 0px;
+  right: calc(50% - 50vw);
+}
+div#third-section {
+  bottom: -100px;
 }
 </style>

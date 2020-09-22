@@ -1,10 +1,5 @@
 <template>
-  <div
-    class="wall-collection"
-    v-dragscroll
-    @scroll.passive="onScroll"
-    ref="outer"
-  >
+  <div class="wall-collection" v-dragscroll @scroll.passive="onScroll" ref="outer">
     <div class="wall-container" ref="walls" :style="containerStyle">
       <div
         v-for="(item, index) in items"
@@ -84,7 +79,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.scrollToMiddle();
-    }, 500);
+    }, 10);
   },
   computed: {
     containerStyle() {

@@ -11,7 +11,10 @@ import "./assets/css/main.css";
 import "hooper/dist/hooper.css";
 
 import Vue2TouchEvents from "vue2-touch-events";
-Vue.use(Vue2TouchEvents);
+Vue.use(Vue2TouchEvents, {
+  tapTolerance: 100,
+  swipeTolerance: 100,
+});
 
 import Vuesax from "vuesax";
 import "vuesax/dist/vuesax.css"; //Vuesax styles

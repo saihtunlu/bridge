@@ -68,18 +68,15 @@ body {
   padding-top: 50px !important;
   padding-bottom: 30px !important;
   position: relative;
-  margin-top: -35px;
 }
 
 .sec-roll3-section {
-  background: url("../../../public/image/roll2-bg.png");
+  background: rgb(var(--vs-primary));
   height: 100vh;
   width: 100%;
   margin-top: -35px;
-  background-position: bottom;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
+  display: flex;
+  align-items: flex-end;
   position: absolute;
   bottom: 0px;
   left: 0px;
@@ -90,6 +87,11 @@ p#subtitles > span {
   padding: 0px !important;
   margin: 0px !important;
   line-height: 1 !important;
+}
+#subtitles {
+  position: relative;
+  top: 10px;
+  width: 75% !important;
 }
 .roll4-content {
   height: 100vh;
@@ -107,7 +109,7 @@ p#subtitles > span {
 div#balls {
   width: 400px;
   position: absolute;
-  height: 400px;
+  height: 350px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -122,21 +124,67 @@ div#balls {
   height: 100vh;
   z-index: 1;
 }
+.fade-down {
+  -webkit-animation: fade-down 2s infinite linear;
+  animation: fade-down 2s infinite linear;
+}
+.fade-up {
+  -webkit-animation: fade-up 2s infinite linear;
+  animation: fade-up 2s infinite linear;
+}
+@keyframes fade-up {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+
+    opacity: 1;
+  }
+  75% {
+    -webkit-transform: translateY(-20px);
+    transform: translateY(-20px);
+
+    opacity: 0;
+  }
+}
+@-webkit-keyframes fade-down {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+
+    opacity: 1;
+  }
+  75% {
+    -webkit-transform: translateY(20px);
+    transform: translateY(20px);
+
+    opacity: 0;
+  }
+}
+@keyframes fade-down {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+
+    opacity: 1;
+  }
+  75% {
+    -webkit-transform: translateY(20px);
+    transform: translateY(20px);
+
+    opacity: 0;
+  }
+}
+
 .circle-bg {
   border-radius: 100%;
   position: absolute;
   margin: auto;
-  bottom: 50px;
+  bottom: 30px;
   min-width: 2000px;
   min-height: 2000px;
   animation-duration: 1s !important;
 }
-.roll3 {
-  background: url("../../../public/image/roll3-bg.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 10% 0%;
-}
+
 div#outter-chart,
 div#inner-chart {
   position: absolute;
@@ -243,6 +291,10 @@ div#inner-chart {
   padding-left: 30px !important;
   padding-right: 30px !important;
 }
+.card-divider {
+  border-bottom-left-radius: 50% 10%;
+  border-bottom-right-radius: 50% 10%;
+}
 .footer-radius-fb .div-divider {
   height: 100px;
   margin-top: -1px;
@@ -292,7 +344,8 @@ div#app {
 .text-center {
   text-align: center;
 }
-button.vs-button.vs-button--default {
+button.vs-button.vs-button--default,
+button.vs-button.vs-button--border {
   height: 50px !important;
   width: 260px !important;
   border-radius: 30px !important;
@@ -302,6 +355,9 @@ button.vs-button.vs-button--default {
 .vs-input {
   height: 40px !important;
   width: 100% !important;
+}
+.gray-pg {
+  background: #efefef;
 }
 /* ------------------------------------------------'mobile'------------------------------------------------ */
 @media screen and (max-width: 600px) {
@@ -347,8 +403,8 @@ button.vs-button.vs-button--default {
 .logo-dot {
   width: 45px;
   height: 45px;
-  top: 12px;
-  right: 64px;
+  top: 14px;
+  right: 20px;
   z-index: 1000;
 }
 .dot {
@@ -419,7 +475,7 @@ section.inner-hooper .hooper-pagination {
     font-weight: bold !important;
   }
   .sm-text {
-    font-size: 24px !important;
+    font-size: 20px !important;
   }
   .dot-animation {
     height: 1400px;

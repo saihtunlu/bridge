@@ -1,15 +1,10 @@
 <template>
   <Flipper
     :spring="{ stiffness: 50, damping: 15 }"
-    style=" z-index: 1001;"
+    style="max-height:100vh;z-index:1001; max-width:100vw;overflow:hidden"
     :flip-key="key"
   >
-    <div
-      class="flex-center pointer"
-      @click="open = !open"
-      id="menuBtn"
-      v-if="!open"
-    >
+    <div class="flex-center pointer" @click="open = !open" id="menuBtn" v-if="!open">
       <Flipped style="position:absolute" flip-id="square">
         <div class="dot-menu"></div>
       </Flipped>
@@ -17,7 +12,8 @@
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="35"
-        fill="rgb(var(--vs-primary))"
+        :fill="color"
+        style="z-index:10000001;"
         height="35"
         viewBox="0 0 24 24"
       >
@@ -32,15 +28,12 @@
       style="max-height:100vh; margin-left:-15px;margin-right:-15px;z-index:1000000; max-width:100vw;overflow:hidden"
     >
       <div class="sidebar side-padding animated fadeIn" v-if="open">
-        <div
-          class="flex-x-between w-100 flex-align-center"
-          style="margin-bottom:1rem; "
-        >
+        <div class="flex-x-between w-100 flex-align-center" style="margin-bottom:1rem; ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             @click="open = !open"
             width="35"
-            class="pointer"
+            class="pointer mt-2"
             fill="#fff"
             height="35"
             viewBox="0 0 24 24"
@@ -50,28 +43,24 @@
             />
           </svg>
 
-          <img src="/image/logo-white.png" width="200px" alt />
+          <img src="/image/white-logo.png" class="logo mt-3" width="200px" alt />
         </div>
-        <p class="white text my-0 pointer" @click="$router.push('/')">
-          {{ $t("home") }}
-        </p>
+        <p class="white text my-0 pointer" @click="$router.push('/')">{{ $t("home") }}</p>
         <div class="divider"></div>
         <p
           class="white text my-0 pointer"
           @click="$router.push({ name: 'Wall', params: { show: false } })"
-        >
-          {{ $t("wall") }}
-        </p>
+        >{{ $t("wall") }}</p>
         <div class="divider"></div>
         <p class="white text mt-0 pointer">{{ $t("detail") }}</p>
         <div class="divider"></div>
-        <p class="white text mt-0 pointer" v-if="LoggedIn" @click="logout">
-          {{ $t("Logout") }}
-        </p>
-        <div
-          class="w-100 flex-center"
-          style="position:absolute; bottom:200px;left:0px;right:0px;"
-        >
+        <p
+          class="white text mt-0 pointer"
+          @click="$router.push({ name: 'Stories' })"
+        >{{ $t("stories") }}</p>
+        <div class="divider"></div>
+        <p class="white text mt-0 pointer" v-if="LoggedIn" @click="logout">{{ $t("Logout") }}</p>
+        <div class="w-100 flex-center" style="position:absolute; bottom:200px;left:0px;right:0px;">
           <Lang class="mx-auto" />
         </div>
         <footerFB />
@@ -85,6 +74,12 @@ import { Flipper, Flipped } from "vue-flip-toolkit";
 import Lang from "../components/LangaugeSwitcher";
 import footerFB from "../components/footerFB";
 export default {
+  props: {
+    color: {
+      type: String,
+      default: "rgb(var(--vs-primary))",
+    },
+  },
   components: {
     Flipper,
     Flipped,
@@ -116,16 +111,11 @@ export default {
 </script>
 <style>
 div#menuBtn {
-  background: #efefef;
   position: absolute;
   z-index: 1000000000;
   left: 15px;
-  top: 12px;
+  top: 14px;
   padding: 5px;
-  border-radius: 30px;
-  border-bottom-right-radius: 30px;
-
-  box-shadow: 0px 4px 25px -8px #efefef;
 }
 .dot-menu {
   background: rgb(var(--vs-primary));

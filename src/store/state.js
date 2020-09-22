@@ -1,3 +1,5 @@
+import { en, mm } from "../constant/audio";
+
 export default {
   posts: [],
   page: 1,
@@ -5,4 +7,7 @@ export default {
   release: false,
   showSwitcher: false,
   lang: "mm",
+  playing: "",
+  mmAudio: mm,
+  enAudio: en,
 };

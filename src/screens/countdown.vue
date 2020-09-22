@@ -2,7 +2,7 @@
   <div class="row countown primary-bg">
     <div class="col-12 px-0 flex-column flex-x-between">
       <div class="w-100">
-        <div class="div-header animated fadeIn div-divider">
+        <div class="div-header pt-4 animated fadeIn div-divider">
           <div class="flex-center countdown-header flex-column">
             <img src="/image/logo.png" width="265px" alt />
             <p class="primary sm-text">{{ $t("countdown-subtitle") }}</p>

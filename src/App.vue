@@ -1,18 +1,13 @@
 <template>
-  <div
-    id="app"
-    style="min-height: 100vh"
-    @wheel="OnWheel"
-    class="container-fluid"
-  >
+  <div id="app" style="min-height: 100vh" @wheel.passive="OnWheel" class="container-fluid">
     <Switcher v-if="showSwitcher" />
     <Countdown v-if="release && !showSwitcher" />
-    <Flipper :flip-key="$route.fullPath" stagger="gentle">
-      <router-view
-        :key="$route.fullPath"
-        :scrollPosition="scroll"
-        v-if="!release && !showSwitcher"
-      />
+    <Flipper
+      :flip-key="$route.fullPath"
+      v-if="!release && !showSwitcher"
+      :spring="{ stiffness: 50, damping: 15 }"
+    >
+      <router-view :key="$route.fullPath" :scrollPosition="scroll" />
     </Flipper>
   </div>
 </template>
@@ -35,15 +30,13 @@ export default {
     Flipper,
   },
   created() {
-    const check = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("lang"))
-      .split("=")[1];
+    var cookies = document.cookie.split("; ");
+    var check = cookies.find((row) => row.startsWith("lang"));
     if (check) {
-      console.log("created -> check", check);
-      this.$store.commit("setLang", check);
+      var lang = check.split("=")[1];
+      this.$store.commit("setLang", lang);
       this.$store.commit("setShowSwitcher", false);
-      this.$i18n.locale = check;
+      this.$i18n.locale = lang;
     } else {
       this.$store.commit("setShowSwitcher", true);
     }

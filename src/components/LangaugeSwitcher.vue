@@ -1,6 +1,6 @@
 <template>
   <div class="flex-align-center">
-    <p class="white text mr-5 pr-4" @click="changeLang('mm')">MM</p>
+    <p class="white text mr-5 pr-4" @click="changeLang('mm')">မမ</p>
     <span class="side-divider"></span>
     <p class="white text ml-5 pl-4" @click="changeLang('en')">EN</p>
   </div>
@@ -22,11 +22,12 @@ export default {
       }
     },
     setCookie(data) {
-      var now = new Date();
-      var minutes = 1;
-      now.setTime(now.getTime() + minutes * 60 * 1000);
+      var add_minutes = function (dt, minutes) {
+        return new Date(dt.getTime() + minutes * 60000);
+      };
       document.cookie = "lang=" + data;
-      document.cookie = "expires=" + now.toUTCString() + ";";
+      document.cookie =
+        "expires=" + add_minutes(new Date(), 30).toString() + ";";
     },
   },
 };

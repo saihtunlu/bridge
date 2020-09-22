@@ -2,38 +2,25 @@
   <div class="row mt-0" id="auth">
     <div class="col-12 flex-center">
       <div
-        class="flex-center dialog-content   login flex-column "
-        style="padding: 20px;"
+        class="flex-center dialog-content login flex-column"
+        style="padding: 20px;background: #fff !important;"
       >
-        <img
-          src="../../public/image/logo.png"
-          width="220px;"
-          style="margin:30px ;"
-          alt
-        />
+        <img src="../../public/image/logo.png" width="220px;" style="margin:30px ;" alt />
         <form @submit.prevent="onSubmit" class="w-100">
-          <vs-input
-            v-model="username"
-            label="Username"
-            class="mb-5"
-            placeholder="Enter username"
-          >
-          </vs-input>
+          <vs-input v-model="username" label="Username" class="mb-5" placeholder="Enter username"></vs-input>
           <vs-input
             type="password"
             class="mb-3"
             v-model="password"
             placeholder="Enter your password"
             label="Password"
-          >
-          </vs-input>
+          ></vs-input>
           <vs-button
             ref="button"
             class="w-100 mt-5 mb-3"
             style="width:100% !important"
             type="submit"
-            >Login</vs-button
-          >
+          >Login</vs-button>
         </form>
       </div>
     </div>
@@ -71,10 +58,6 @@ export default {
         username: this.username,
         password: this.password,
       });
-    },
-    Register() {
-      var data = this.register;
-      this.$store.dispatch("register", { data });
     },
   },
 };

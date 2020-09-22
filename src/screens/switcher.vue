@@ -1,11 +1,8 @@
 <template>
   <div class="row" id="sitcher">
-    <div
-      class="col-12 p-0 flex-x-between flex-column"
-      style="height:100vh;overflow:hidden"
-    >
+    <div class="col-12 p-0 flex-x-between flex-column" style="height:100vh;overflow:hidden">
       <div class="upper-div flex-center">
-        <img src="/image/logo.png" class="mt-5" width="265px" alt />
+        <img src="/image/loading-logo.gif" class="mt-5" width="265px" alt />
       </div>
       <div class="footer-radius-switcher animated primary-bg bounceInUp">
         <div
