@@ -25,4 +25,7 @@ export default {
   setPlaying(state, data) {
     state.playing = data;
   },
+  setGetting(state, data) {
+    state.getting = data;
+  },
 };

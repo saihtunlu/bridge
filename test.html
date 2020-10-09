@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+      .active {
+        display: block !important;
+      }
+      .hide {
+        display: none !important;
+      }
+    </style>
+
+    <script>
+      $(document).ready(function() {
+        $(".liquorbox a ").click(function(e) {
+          $(".liquorbox a ").removeClass("activelink");
+          $(this).addClass("activeTab");
+          var tagid = $(this).attr("id");
+
+          $(".bottles")
+            .removeClass("active")
+            .addClass("hide");
+          $("." + tagid)
+            .addClass("active")
+            .removeClass("hide");
+
+          $("html, body")
+            .stop()
+            .animate(
+              {
+                scrollTop: $("#bottle").offset().top,
+              },
+              500,
+              "linear"
+            );
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <style>
+      .liquorSelector {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .liquorbox {
+        width: 20%;
+        padding: 5px 15px;
+        text-align: center;
+        background-color: #e11111;
+        border-radius: 5px;
+        margin-left: 5px;
+      }
+      .liquorbox a {
+        text-decoration: none;
+        color: #fff;
+      }
+    </style>
+    <div class="liquorSelector" centered>
+      <div class="liquorbox">
+        <a class="liquor_all" id="all">All</a>
+      </div>
+      <div class="liquorbox">
+        <a class="liquor_premium" id="premium">Premium</a>
+      </div>
+      <div class="liquorbox">
+        <a class="liquor_standard" id="standard">Standard</a>
+      </div>
+
+      <div class="all bottles">all</div>
+      <div class="premium bottles">premium</div>
+      <div class="standard bottles">standard</div>
+    </div>
+  </body>
+</html>

@@ -1,6 +1,16 @@
 <template>
-  <div class="wall-collection" v-dragscroll @scroll.passive="onScroll" ref="outer">
-    <div class="wall-container" ref="walls" :style="containerStyle">
+  <div
+    class="wall-collection"
+    v-dragscroll="isBrowser"
+    @scroll.passive="onScroll"
+    ref="outer"
+  >
+    <div
+      class="wall-container"
+      ref="walls"
+      :style="containerStyle"
+      style="padding-bottom: 170px;"
+    >
       <div
         v-for="(item, index) in items"
         class="cell-container"
@@ -16,7 +26,7 @@
 
 <script>
 import { dragscroll } from "vue-dragscroll";
-
+import { isBrowser } from "mobile-device-detect";
 export default {
   props: {
     isAdded: {
@@ -53,7 +63,9 @@ export default {
     dragscroll: dragscroll,
   },
   data() {
-    return {};
+    return {
+      isBrowser: isBrowser,
+    };
   },
   watch: {
     isAdded() {
@@ -64,7 +76,7 @@ export default {
   methods: {
     onScroll() {
       if (
-        this.$refs.outer.scrollHeight - this.$refs.outer.clientHeight ===
+        this.$refs.outer.scrollHeight - this.$refs.outer.clientHeight - 200 <
         this.$refs.outer.scrollTop
       ) {
         this.$emit("reachBottom");

@@ -1,20 +1,22 @@
 <template>
   <div
-    class="col-sm-12 col-md-4 audio-section flex-center"
-    :class="index%2 ? 'gray-pg':'primary-bg'"
+    class="col-12 audio-section flex-center"
+    :class="index % 2 ? 'gray-pg' : 'primary-bg'"
     style="z-index:10;"
   >
     <p
-      :id="'subtitles'+audio.name"
+      :id="'subtitles' + audio.name"
       class="sm-text subtitle w-100 my-0 text-center"
-      :class="showSubtitle ? index%2?'primary':'white' : 'hidden'"
+      :class="showSubtitle ? (index % 2 ? 'primary' : 'white') : 'hidden'"
     ></p>
-    <div class="audio-ball" :class="index%2 ? 'primary-bg':'gray-pg'">
+    <div class="audio-ball" :class="index % 2 ? 'primary-bg' : 'gray-pg'">
       <p
-        :class="index%2 ? 'primary':' white'"
+        :class="index % 2 ? 'primary' : ' white'"
         class="text"
         style="position: relative;top: -150px;"
-      >{{audio.name}}</p>
+      >
+        {{ audio.name }}
+      </p>
 
       <div
         :id="audio.name"
@@ -23,7 +25,9 @@
       ></div>
       <div
         class="audio-control animated bounceIn px-2"
-        :style="`animation-delay:${Math.floor(Math.random() * 1000)}ms !important;`"
+        :style="
+          `animation-delay:${Math.floor(Math.random() * 1000)}ms !important;`
+        "
         style="width:144px;height:144px;border-radius:100%;overflow:hidden;"
       >
         <svg
@@ -31,8 +35,8 @@
           width="45"
           height="45"
           viewBox="0 0 24 24"
-          :fill="index%2 ?'#efefef':'rgb(var(--vs-primary))'"
-          :stroke="index%2 ?'#efefef':'rgb(var(--vs-primary))'"
+          :fill="index % 2 ? '#efefef' : 'rgb(var(--vs-primary))'"
+          :stroke="index % 2 ? '#efefef' : 'rgb(var(--vs-primary))'"
           stroke-width="2"
           v-if="!play"
           @click="Play()"
@@ -48,8 +52,8 @@
           v-if="play"
           @click="stopAudio"
           width="45"
-          :fill="index%2 ?'#efefef':'rgb(var(--vs-primary))'"
-          :stroke="index%2 ?'#efefef':'rgb(var(--vs-primary))'"
+          :fill="index % 2 ? '#efefef' : 'rgb(var(--vs-primary))'"
+          :stroke="index % 2 ? '#efefef' : 'rgb(var(--vs-primary))'"
           height="45"
           stroke-width="2"
           stroke-linecap="round"
@@ -63,7 +67,7 @@
           class="hidden"
           ref="audio"
           :src="audio.file"
-          :id="'audio'+audio.name"
+          :id="'audio' + audio.name"
           controls
         />
       </div>
@@ -76,6 +80,10 @@ import audioSync from "audio-sync-with-text";
 import { mapState } from "vuex";
 export default {
   props: {
+    setplay: {
+      type: Boolean,
+      default: true,
+    },
     audio: {
       type: Object,
       default: null,
@@ -106,6 +114,9 @@ export default {
         }
       }
     },
+  },
+  beforeDestroy() {
+    this.stopAudio();
   },
   mounted() {},
   methods: {
@@ -157,7 +168,7 @@ export default {
 };
 </script>
 
-<style >
+<style>
 .subtitle > span {
   background: transparent !important;
 }

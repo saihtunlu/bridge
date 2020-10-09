@@ -6,6 +6,7 @@ export default {
   next: null,
   release: false,
   showSwitcher: false,
+  getting: false,
   lang: "mm",
   playing: "",
   mmAudio: mm,

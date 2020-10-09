@@ -1,9 +1,10 @@
 body {
   overflow-x: hidden;
-  max-width: 100vw;
+  width: 100vw;
   transition: background-color 0.3s ease;
   color: rgb(var(--vs-dark));
   margin: 0px !important;
+  height: calc(var(--vh, 1vh) * 100) !important;
 }
 
 html {
@@ -11,6 +12,7 @@ html {
   width: 100%;
   line-height: 1.5;
   letter-spacing: 0.01rem;
+  scroll-behavior: smooth;
   font-weight: bold;
 }
 
@@ -29,14 +31,14 @@ html {
 /* ------------------------------------------------'scrollBar'------------------------------------------------ */
 /* width */
 *::-webkit-scrollbar {
-  width: 5px;
+  width: 3px;
   height: 1px;
   display: none !important;
 }
-/* div#select-image::-webkit-scrollbar,
-div#select-image::-webkit-scrollbar-thumb {
+.show-scroll::-webkit-scrollbar,
+.show-scroll::-webkit-scrollbar-thumb {
   display: block !important;
-} */
+}
 /* Track */
 *::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px #00000030;
@@ -48,6 +50,7 @@ div#select-image::-webkit-scrollbar-thumb {
 *::-webkit-scrollbar-thumb {
   background: rgb(var(--vs-primary));
   border-radius: 200px !important;
+  max-height: 10px !important;
   display: none !important;
 }
 /* Handle on hover */

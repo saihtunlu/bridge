@@ -1,16 +1,16 @@
 <template>
-  <div class="footer-radius-balls ">
+  <div class="footer-radius-balls">
     <div class="bottom-div">
       <hooper
         :vertical="false"
-        class="inner-hooper "
+        class="inner-hooper"
         :infiniteScroll="true"
         :itemsToShow="limit"
         :centerMode="true"
         ref="carousel2"
       >
         <slide
-          class=" flex-center animated bounceIn"
+          class="flex-center animated bounceIn"
           :style="
             `animation-delay:${Math.floor(Math.random() * 1000)}ms !important;`
           "
@@ -18,8 +18,46 @@
           :key="ball"
         >
           <div
-            style="height:144px;width:144px;border-radius:100%;background:rgb(var(--vs-primary))"
-          ></div>
+            class="extraBall flex-center"
+            style="
+              border-radius: 100%;
+              background: rgb(var(--vs-primary));
+            "
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="male"
+              width="20.572"
+              height="20.495"
+              viewBox="0 0 20.572 20.495"
+            >
+              <g
+                id="Component_3_1"
+                data-name="Component 3 – 1"
+                transform="translate(0.354 0.5)"
+              >
+                <line
+                  id="Line_69"
+                  data-name="Line 69"
+                  x1="19.556"
+                  y2="19.556"
+                  transform="translate(0 0.085)"
+                  fill="none"
+                  stroke="#4e008e"
+                  stroke-width="1"
+                />
+                <path
+                  id="Path_235"
+                  data-name="Path 235"
+                  d="M-848.392,7789h17.062v16.274"
+                  transform="translate(851.048 -7789)"
+                  fill="none"
+                  stroke="#4e008e"
+                  stroke-width="1"
+                />
+              </g>
+            </svg>
+          </div>
         </slide>
       </hooper>
     </div>
@@ -66,6 +104,11 @@ export default {
   left: 0px;
   background: transparent;
   width: 100%;
-  z-index: 100;
+  z-index: 999;
+}
+.male {
+  position: relative;
+  top: -58px;
+  right: -58px;
 }
 </style>

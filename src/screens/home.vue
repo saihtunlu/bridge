@@ -1,130 +1,191 @@
 <template>
   <Flipper
     :flip-key="show"
-    v-touch:swipe="swipe"
-    class="row"
+    class="row vh-100"
     :spring="{ stiffness: 50, damping: 15 }"
-    style="height:100vh;overflow:hidden;"
+    style="overflow: hidden"
   >
-    <div
-      class="fix-position flex-column flex-x-between"
-      style="z-index:1000;padding-top:0.3rem;padding-bottom:30px;"
+    <vs-button
+      v-if="show !== 'section1'"
+      class="fade-down"
+      :style="`background:rgba(${upColor},0.2)!important;`"
+      id="upBtn"
+      circle
+      @click="swipe('bottom')"
+      transparent
     >
-      <div class="flex-center">
-        <vs-button
-          v-if="show !=='section1'"
-          class="fade-down"
-          circle
-          @click="swipe('bottom')"
-          transparent
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            viewBox="0 0 24 24"
-            fill="none"
-            :stroke="upColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-chevrons-up"
-          >
-            <polyline points="17 11 12 6 7 11" />
-            <polyline points="17 18 12 13 7 18" />
-          </svg>
-        </vs-button>
-      </div>
-      <div class="flex-center">
-        <vs-button
-          circle
-          v-if="show !=='section10'"
-          class="fade-up"
-          @click="swipe('top')"
-          transparent
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            viewBox="0 0 24 24"
-            fill="none"
-            :stroke="downColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-chevrons-down"
-          >
-            <polyline points="7 13 12 18 17 13" />
-            <polyline points="7 6 12 11 17 6" />
-          </svg>
-        </vs-button>
-      </div>
-    </div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="30"
+        height="30"
+        viewBox="0 0 24 24"
+        fill="none"
+        :stroke="`rgb(${upColor})`"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="feather feather-chevrons-up"
+      >
+        <polyline points="17 11 12 6 7 11" />
+        <polyline points="17 18 12 13 7 18" />
+      </svg>
+    </vs-button>
+    <vs-button
+      circle
+      :style="
+        show === 'section1'
+          ? `background:rgba(${downColor},0.4)!important;overflow: visible;`
+          : `background:rgba(${downColor},0.2)!important;overflow: visible;`
+      "
+      v-if="show !== 'section10'"
+      :class="show !== 'section1' && 'fade-up'"
+      id="downBtn"
+      @click="swipe('top')"
+      transparent
+    >
+      <div class="ripple-circle" v-if="show == 'section1'"></div>
+      <div
+        class="ripple-circle"
+        style="animation-delay: 350ms !important"
+        v-if="show == 'section1'"
+      ></div>
+      <div
+        class="ripple-circle"
+        style="animation-delay: 700ms !important"
+        v-if="show == 'section1'"
+      ></div>
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="30"
+        height="30"
+        viewBox="0 0 24 24"
+        fill="none"
+        style="z-index: 100"
+        :stroke="`rgb(${
+          show === 'section1' ? 'var(--vs-primary)' : downColor
+        })`"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="feather feather-chevrons-down"
+      >
+        <polyline points="7 13 12 18 17 13" />
+        <polyline points="7 6 12 11 17 6" />
+      </svg>
+    </vs-button>
+
     <MenuBtn :color="menuColor" />
     <!-- Section 1 -->
-    <div class="col-12 p-0 flex-column flex-x-between" v-if="show === 'section1' ">
+    <div
+      class="col-12 p-0 flex-column flex-x-between"
+      v-if="show === 'section1'"
+    >
       <!-- <Flipped flip-id="circle"> -->
-      <div class="circle-bg" style="background:#efefef;z-index:1;" id="first-section"></div>
+      <div
+        class="circle-bg"
+        style="background: #efefef; z-index: 1"
+        id="first-section"
+      ></div>
       <!-- </Flipped> -->
-      <div class="w-100" style="z-index:1;">
+      <div class="w-100" style="z-index: 1">
         <div class="flex-column w-100 side-padding">
-          <div class="flex-end w-100 flex-align-center" style="margin-bottom:2rem;">
+          <div
+            class="flex-end w-100 flex-align-center"
+            style="margin-bottom: 2rem"
+          >
             <div class="flex-align-center flex-end">
-              <img src="/image/logo.png" class="logo mt-3" width="200px" style=" z-index: 1001;" />
-              <Flipped flip-id="circle" style="position:absolute">
-                <div class="dot logo-dot" style="position:absolute;z-index:999;"></div>
+              <img
+                src="/image/logo.svg"
+                class="logo animated fadeIn"
+                width="220px"
+                style="z-index: 1001; animation-delay: 1.2s !important"
+              />
+              <Flipped flip-id="circle" style="position: absolute">
+                <div
+                  class="dot logo-dot"
+                  style="position: absolute; z-index: 999"
+                ></div>
               </Flipped>
               <div
-                class="dot logo-dot"
-                style="position:absolute;width: 43px!important;
-    height: 42px!important;right:21px !important;top:15px !important; z-index:1000;background:#efefef !important;"
+                class="dot logo-dot animated fadeIn"
+                style="
+                  position: absolute;
+                  width: 42px !important;
+                  height: 42px !important;
+                  right: 33px !important;
+                  top: 17px !important;
+                  z-index: 1000;
+                  background: #efefef !important;
+                  animation-delay: 1.2s !important;
+                "
               ></div>
             </div>
           </div>
-          <p class="primary sm-text text-center">{{ $t("countdown-subtitle") }}</p>
+          <p class="primary sm-text text-center">
+            {{ $t("countdown-subtitle") }}
+          </p>
         </div>
 
-        <div style="z-index:1;" class="sec-roll1-section animated fadeIn route-delay mt-0">
-          <p
-            style=" color:#fff; text-align:center;padding:0px 30px"
-            class="text"
-          >{{ $t("roll1-first-text") }}</p>
+        <div
+          style="z-index: 1"
+          class="sec-roll1-section animated fadeIn route-delay mt-0"
+        >
+          <p class="text title bg-text">
+            {{ $t("roll1-first-text") }}
+          </p>
         </div>
       </div>
       <div class="sec-roll3-section">
-        <img src="image/section1.png" width="100%" alt />
+        <img
+          src="image/Home-01.svg"
+          v-if="!isBrowser"
+          class="max-img"
+          width="100%"
+          alt
+        />
+        <img src="image/Desktop1.svg" v-if="isBrowser" width="100%" alt />
       </div>
     </div>
     <!-- End Of Section 1  -->
     <!-- Section 2 -->
-    <div class="col-12 p-0 flex-column page-padding flex-x-between" v-if="show === 'section2' ">
+    <div
+      class="col-12 p-0 flex-column page-padding flex-x-between"
+      v-if="show === 'section2'"
+    >
       <Flipped flip-id="circle">
         <div class="circle-bg primary-bg overflow-hidden" id="section-section">
-          <img src="image/section2.png" width="100%" class="animated fadeIn" alt />
+          <img src="image/Home-02.svg" width="100%" v-if="!isBrowser" alt />
+          <img src="image/Desktop2.svg" width="100%" v-if="isBrowser" alt />
         </div>
       </Flipped>
-      <div class="w-100" style="z-index:1;">
+      <div class="w-100" style="z-index: 1">
         <div
-          style="z-index:1;"
-          v-if="show === 'section2' "
+          style="z-index: 1"
+          v-if="show === 'section2'"
           class="sec-roll1-section animated fadeIn route-delay"
         >
-          <p
-            style=" color:#fff;width:70%; text-align:center;"
-            class="text mx-auto"
-          >{{ $t("roll1-second-text") }}</p>
+          <p class="text title mx-auto bg-text">
+            {{ $t("roll1-second-text") }}
+          </p>
         </div>
       </div>
     </div>
     <!-- End Of Section 2 -->
 
     <!-- Section 3 -->
-    <div class="col-12 flex-column flex-x-between page-padding" v-if="show === 'section3'">
+    <div
+      class="col-12 flex-column flex-x-between page-padding"
+      v-if="show === 'section3'"
+    >
       <Flipped flip-id="circle" v-if="show === 'section3'">
         <div class="ball"></div>
       </Flipped>
-      <p class="text text-center animated fadeIn px-sm-4 mx-sm-5 text-width">
+      <p
+        class="text text-center animated fadeIn text-width"
+        style="padding: 0px 15px; max-width: 700px; width: 95%"
+      >
+        <span>{{ $t("roll2-text-helper") }}</span>
         <span class="primary">{{ $t("purple") }}</span>
         <span class="text-animated">{{ $t("roll2-text") }}</span>
       </p>
@@ -137,22 +198,38 @@
       v-if="show === 'section4'"
     >
       <div class="circle-bg gray-pg overflow-hidden">
-        <img src="image/section3.png" alt />
+        <img
+          src="image/Home-03.svg"
+          width="100%"
+          v-if="!isBrowser"
+          style="bottom: -20px !important"
+          alt
+        />
+        <img
+          src="image/Desktop4.svg"
+          width="100%"
+          v-if="isBrowser"
+          style="bottom: -50px !important"
+          alt
+        />
       </div>
-      <div style="z-index:1000;" class="flex-center flex-column">
-        <p class="text text-center primary">
+      <div style="z-index: 1000" class="flex-center w-100 flex-column">
+        <p
+          class="sm-text text-center primary"
+          style="
+            color: #777 !important;
+            padding: 0px 15px;
+            max-width: 700px;
+            width: 95%;
+          "
+        >
           {{ $t("audio1") }}
           <br />
-          {{$t('audio-file')}}
+          {{ $t("audio1-helper") }}
         </p>
         <p
-          class="primary sm-text text-center px-4 mb-3"
-          v-if="!play"
-          style="font-size:14px;"
-        >{{ $t("play") }}</p>
-        <p
           id="subtitles"
-          class="sm-text audio-text w-100 my-0 text-center primary"
+          class="text audio-text w-100 my-0 text-center primary"
           :class="showSubtitle ? '' : 'hidden'"
         ></p>
       </div>
@@ -169,24 +246,57 @@
         <div
           class="sm-ball animated bounceIn"
           v-for="(ball, n) in balls"
-          :style="
-            `top:${ball.top} !important;left:${ball.left} !important;right:${
-              ball.right
-            }!important;animation-delay:${Math.floor(Math.random() * 800) +
-              1000}ms !important;`
-          "
+          :style="`top:${ball.top} !important;left:${
+            ball.left
+          } !important;right:${ball.right}!important;animation-delay:${
+            Math.floor(Math.random() * 800) + 1000
+          }ms !important;`"
           :key="ball + n"
         ></div>
       </div>
-      <div class="roll4-content animated fadeIn page-padding flex-x-between flex-column">
+      <div
+        class="roll4-content animated fadeIn page-padding flex-x-between flex-column"
+        style="z-index: 998"
+      >
+        <p
+          class="text title text-center white"
+          style="
+            padding: 0px 15px;
+            margin-left: auto;
+            max-width: 700px;
+            width: 95%;
+            margin-right: auto;
+          "
+          v-html="$t('roll4-title')"
+        ></p>
         <p
           class="text text-center white"
-          style="width:80%;margin-left:auto;margin-right:auto"
-        >{{ $t("roll4-title") }}</p>
-        <p
-          class="text text-center white"
-          style="width:80%;margin-left:auto;margin-right:auto;margin-bottom:5rem"
-        >{{ $t("roll4-subtitle") }}</p>
+          style="
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 5rem;
+          "
+        >
+          {{ $t("roll4-subtitle") }}
+          <span class="tooltip">
+            <slide-x-right-transition>
+              <div class="tooltip-content" v-if="showTooltip">
+                <span class="sm-text primary"
+                  >[Source: Gender and Politics in Myanmar, Women and Men
+                  Candidates in the 2015 Election, 2017]</span
+                >
+              </div>
+            </slide-x-right-transition>
+
+            <span
+              class="mark pointer"
+              @click="showTooltip = true"
+              v-click-outside="hideToggle"
+              >[1]</span
+            >
+          </span>
+        </p>
       </div>
       <div class="ball animated fadeIn addBorder route-delay"></div>
     </div>
@@ -198,22 +308,38 @@
       v-if="show === 'section6'"
     >
       <div class="circle-bg gray-pg overflow-hidden">
-        <img src="image/section6.png" alt />
+        <img
+          src="image/Home-04.svg"
+          width="100%"
+          v-if="!isBrowser"
+          style="bottom: -20px !important"
+          alt
+        />
+        <img src="image/Desktop6.svg" width="100%" v-if="isBrowser" alt />
+
+        <!-- <img src="image/Home-04.svg" class="hand-png" v-if="!isBrowser" alt />
+        <div class="flex-x-between hand-div" v-if="isBrowser">
+          <img src="image/left.png" width="600px" alt />
+          <img src="image/right.png" width="600px" alt />
+        </div> -->
       </div>
-      <div style="z-index:1000;" class="flex-center flex-column">
-        <p class="text text-center primary">
+      <div style="z-index: 1000" class="flex-center w-100 flex-column">
+        <p
+          class="sm-text text-center primary"
+          style="
+            color: #777 !important;
+            padding: 0px 15px;
+            max-width: 700px;
+            width: 95%;
+          "
+        >
           {{ $t("audio2") }}
           <br />
-          {{$t('audio-file')}}
+          {{ $t("audio2-helper") }}
         </p>
         <p
-          class="primary sm-text text-center px-4 mb-3"
-          v-if="!play"
-          style="font-size:14px;"
-        >{{ $t("play") }}</p>
-        <p
           id="subtitles"
-          class="sm-text audio-text w-100 my-0 text-center primary"
+          class="text audio-text w-100 my-0 text-center primary"
           :class="showSubtitle ? '' : 'hidden'"
         ></p>
       </div>
@@ -224,20 +350,46 @@
       <Flipped flip-id="circle" v-if="show === 'section7'">
         <div class="primary-bg circle-bg"></div>
       </Flipped>
-      <div class="roll6-content flex-x-between page-padding animated fadeIn flex-column">
-        <div>
-          <p
-            class="text text-center white text-animated"
-            style="width:80%;margin-left:auto;margin-right:auto"
-          >{{ $t("roll6-title") }}</p>
-          <p
-            class="white text-center pt-lg-0 animated text-animated2 fadeIn xs-text"
-            style="width:90%;margin-left:auto;margin-right:auto;"
-          >(pg. 11, 60 Gender and Politics in Myanmar, GEN)</p>
-        </div>
+      <div
+        class="roll6-content flex-x-between page-padding animated fadeIn flex-column"
+        style="z-index: 998"
+      >
+        <p
+          class="text text-center title white text-animated"
+          style="
+            padding: 0px 15px;
+            max-width: 700px;
+            width: 95%;
+            margin-left: auto;
+            z-index: 1000;
+            margin-right: auto;
+          "
+        >
+          {{ $t("roll6-title") }}
+          <span class="tooltip">
+            <slide-x-right-transition>
+              <div class="tooltip-content" v-if="showTooltip">
+                <span class="sm-text primary"
+                  >[Source: Gender and Politics in Myanmar, Women and Men
+                  Candidates in the 2015 Election, 2017]</span
+                >
+              </div>
+            </slide-x-right-transition>
+            <span
+              class="mark pointer"
+              @click="showTooltip = !showTooltip"
+              v-click-outside="hideToggle"
+              >[2]</span
+            >
+          </span>
+        </p>
       </div>
 
       <div class="ball animated fadeIn">
+        <div class="chart-text animated fadeIn route-delay">
+          <p class="sm-text ten white">{{ $t("10") }}</p>
+          <p class="sm-text five white">{{ $t("54") }}</p>
+        </div>
         <div class="flex-center" id="chart" v-if="showChart">
           <apexchart
             id="inner-chart"
@@ -266,48 +418,108 @@
       v-if="show === 'section8'"
     >
       <div class="circle-bg gray-pg overflow-hidden">
-        <img src="image/section8.png" alt />
+        <!-- <img src="image/Home-05.svg" class="audio-3-img" alt /> -->
+        <img
+          src="image/Home-05.svg"
+          width="100%"
+          v-if="!isBrowser"
+          style="bottom: -20px !important"
+          alt
+        />
+        <img src="image/Desktop8.svg" width="100%" v-if="isBrowser" alt />
       </div>
-      <div style="z-index:1000;" class="flex-center flex-column">
-        <p class="text text-center primary" style="width:75%">
+      <div style="z-index: 1000" class="flex-center w-100 flex-column">
+        <p
+          class="sm-text text-center primary"
+          style="
+            color: #777 !important;
+            padding: 0px 15px;
+            max-width: 700px;
+            width: 95%;
+          "
+        >
           {{ $t("audio3") }}
           <br />
-          {{$t('audio-file')}}
+          {{ $t("audio3-helper") }}
         </p>
-        <p
-          class="primary sm-text text-center px-4 mb-3"
-          v-if="!play"
-          style="font-size:14px;"
-        >{{ $t("play") }}</p>
+
         <p
           id="subtitles"
-          class="sm-text audio-text w-100 my-0 text-center primary"
+          class="text audio-text w-100 my-0 text-center primary"
           :class="showSubtitle ? '' : 'hidden'"
         ></p>
       </div>
     </div>
     <!-- end of section 8 -->
     <!-- section 9 -->
-    <div class="ball animated bounceIn addBorder route-delay" v-if="show === 'section9'"></div>
+    <div
+      class="ball animated bounceIn addBorder route-delay"
+      v-if="show === 'section9'"
+    >
+      <svg
+        id="female"
+        data-name="Component 2 – 1"
+        xmlns="http://www.w3.org/2000/svg"
+        width="26"
+        height="27"
+        viewBox="0 0 26 27"
+      >
+        <line
+          id="Line_58"
+          data-name="Line 58"
+          x2="26"
+          transform="translate(0 16)"
+          fill="none"
+          stroke="#fff"
+          stroke-width="1"
+        />
+        <line
+          id="Line_59"
+          data-name="Line 59"
+          y2="27"
+          transform="translate(13)"
+          fill="none"
+          stroke="#fff"
+          stroke-width="1"
+        />
+      </svg>
+    </div>
     <div class="col-12 flex-center" v-if="show === 'section9'">
       <Flipped flip-id="circle">
-        <div class="primary-bg circle-bg" style="bottom:25vh !important"></div>
+        <div class="primary-bg circle-bg" style="bottom: 25vh !important"></div>
       </Flipped>
       <div
         class="roll8-content page-padding fix-position flex-x-between animated fadeIn flex-column"
+        style="z-index: 998"
       >
         <div>
           <p
-            class="text text-center white text-animated"
-            style="width:80%;margin-left:auto;margin-right:auto"
-          >{{ $t("roll8-title") }}</p>
-          <p
-            class="white text-center xs-text animated text-animated2 fadeIn"
-            style="width:90%;margin-left:auto;margin-right:auto;"
+            class="text text-center title white text-animated"
+            style="
+              padding: 0px 15px;
+              max-width: 700px;
+              width: 95%;
+              margin-left: auto;
+              margin-right: auto;
+            "
           >
-            (CEDAW and GEN, Concluding Observations on the Combined Fourth and
-            Fifth Periodic Reports of Myanmar, p.10-11) (pg. 29, 36 Gender and
-            Politics in Myanmar, GEN)
+            {{ $t("roll8-title") }}
+            <span class="tooltip">
+              <slide-x-right-transition>
+                <div class="tooltip-content" v-if="showTooltip">
+                  <span class="sm-text primary"
+                    >[Source: CEDAW, Concluding Observations on the Combined
+                    Fourth and Fifth Periodic Reports of Myanmar]</span
+                  >
+                </div>
+              </slide-x-right-transition>
+              <span
+                class="mark pointer"
+                @click="showTooltip = true"
+                v-click-outside="hideToggle"
+                >[3]</span
+              >
+            </span>
           </p>
         </div>
       </div>
@@ -321,55 +533,110 @@
     </Flipped>
     <div class="ball" v-if="show === 'section10'">
       <svg
-        @click="$router.push({ name: 'Wall', params: { show: true } })"
         xmlns="http://www.w3.org/2000/svg"
-        width="60"
-        height="60"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="white"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="feather feather-arrow-right"
+        @click="$router.push({ name: 'Wall', params: { show: true } })"
+        width="60.646"
+        class="animated fadeInLeft route-delay"
+        height="59.547"
+        viewBox="0 0 60.646 59.547"
       >
-        <line x1="5" y1="12" x2="19" y2="12" />
-        <polyline points="12 5 19 12 12 19" />
+        <g
+          id="Group_115"
+          data-name="Group 115"
+          transform="translate(-157.641 -376.025)"
+        >
+          <g
+            id="Group_87"
+            data-name="Group 87"
+            transform="translate(-211.053 616.001) rotate(-90)"
+          >
+            <g
+              id="Group_86"
+              data-name="Group 86"
+              transform="translate(187.5 401.638)"
+            >
+              <path
+                id="Path_141"
+                data-name="Path 141"
+                d="M1968.5,2500.1l-22.7,22.7-22.7-22.7"
+                transform="translate(-1923.097 -2500.097)"
+                fill="none"
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="10"
+              />
+            </g>
+          </g>
+          <path
+            id="Path_217"
+            data-name="Path 217"
+            d="M-709.713,8508.8h-50.646"
+            transform="translate(923 -8103)"
+            fill="none"
+            stroke="#fff"
+            stroke-linecap="round"
+            stroke-width="10"
+          />
+        </g>
       </svg>
       <p
-        class="sm-text text-center ex-text px-4"
-        style="position: absolute;top: 150px;"
-      >{{ $t("show-your-support") }}</p>
+        class="sm-text text-center animated fadeIn route-delay"
+        style="position: absolute; width: 50vw; top: 150px"
+      >
+        {{ $t("show-your-support") }}
+      </p>
     </div>
-    <div class="col-12 primary-bg animated fadeIn flex-center" v-if="show === 'section10'">
-      <div class="circle-bg" style="bottom:25vh !important;background:#efefef !important;"></div>
+    <div
+      class="col-12 primary-bg animated fadeIn flex-center"
+      v-if="show === 'section10'"
+    >
+      <div
+        class="circle-bg"
+        style="
+          bottom: calc(var(--vh, 1vh) * 25) !important;
+          background: #efefef !important;
+        "
+      ></div>
       <div class="roll8-content page-padding flex-x-between flex-column">
         <p
           class="text text-center text-animated"
-          style="width:75%;margin-left:auto;margin-right:auto"
-        >{{ $t("roll9-title") }}</p>
+          style="
+            padding: 0px 15px;
+            max-width: 700px;
+            width: 95%;
+            margin-left: auto;
+            margin-right: auto;
+          "
+        >
+          {{ $t("roll9-title") }}
+        </p>
       </div>
-      <footerFB />
+      <footerFB style="bottom: 14vh !important" />
     </div>
     <!-- end of section 10 -->
     <!-- audio  -->
     <Flipped
       flip-id="circle"
+      ref="loading"
       v-if="show === 'section4' || show === 'section6' || show === 'section8'"
     >
       <div class="ball">
         <!-- Roll3 Audio -->
-
         <div
           class="flex-center"
-          style="height: 144px;
-    min-width: 144px;
-    overflow: visible;"
+          style="height: 140px; min-width: 140px; overflow: visible"
         >
-          <div id="audio-wave" style="min-width: 450px !important; height: 450px !important;"></div>
+          <div id="audio-wave" style="min-width: 450px; height: 450px"></div>
           <div
             class="audio-control animated bounceIn px-2"
-            style="width:144px;height:144px;border-radius:100%;overflow:hidden;animation-delay:1800ms"
+            style="
+              width: 140px;
+              height: 140px;
+              border-radius: 100%;
+              overflow: visible;
+              animation-delay: 1800ms;
+            "
           >
             <svg
               class="pointer"
@@ -407,14 +674,35 @@
                 stroke-width="1"
               >
                 <rect width="20" height="22" rx="4" stroke="none" />
-                <rect x="0.5" y="0.5" width="19" height="21" rx="3.5" fill="none" />
+                <rect
+                  x="0.5"
+                  y="0.5"
+                  width="19"
+                  height="21"
+                  rx="3.5"
+                  fill="none"
+                />
               </g>
             </svg>
+            <p
+              class="primary play animated fadeIn sm-text text-center"
+              v-if="!play"
+              style="font-size: 14px; width: 75vw"
+            >
+              {{ $t("play") }}
+            </p>
           </div>
         </div>
       </div>
     </Flipped>
-    <audio style="width:100%;" class="hidden" ref="audio" :src="audio" id="audio" controls />
+    <audio
+      style="width: 100%"
+      class="hidden"
+      ref="audio"
+      :src="audio"
+      id="audio"
+      controls
+    />
   </Flipper>
 </template>
 
@@ -425,7 +713,8 @@ import audioSync from "audio-sync-with-text";
 import MenuBtn from "./menu";
 import footerRadiusBalls from "../components/footerRadiusBalls";
 import footerFB from "../components/footerFB";
-
+import ClickOutside from "vue-click-outside";
+import { isBrowser } from "mobile-device-detect";
 const balls = [
   {
     top: "30px",
@@ -468,9 +757,11 @@ export default {
   },
   data() {
     return {
-      upColor: "rgb(var(--vs-primary))",
-      downColor: "#fff",
-      menuColor: "rgb(var(--vs-primary))",
+      isBrowser: isBrowser,
+      showTooltip: false,
+      upColor: "var(--vs-primary)",
+      downColor: "255,255,255",
+      menuColor: "var(--vs-primary)",
       balls: balls,
       show: "section1",
       showFirstText: true,
@@ -501,18 +792,7 @@ export default {
               opacity: 0.2,
             },
             dataLabels: {
-              name: {
-                show: false,
-                color: "#fff",
-              },
-              value: {
-                offsetY: 140,
-                fontSize: "20px",
-                color: "#fff",
-                formatter: function (val) {
-                  return val + "%";
-                },
-              },
+              show: false,
             },
           },
         },
@@ -526,15 +806,7 @@ export default {
         plotOptions: {
           pie: {
             dataLabels: {
-              offset: -80,
-              value: {
-                offsetY: 140,
-                fontSize: "20px",
-                color: "#fff",
-                formatter: function (val) {
-                  return val + "%";
-                },
-              },
+              show: false,
             },
           },
         },
@@ -543,13 +815,10 @@ export default {
           width: 1,
         },
         dataLabels: {
-          style: {
-            fontSize: "20px",
-            fontWeight: "500",
-          },
+          show: false,
           formatter(val, opts) {
             if (opts.seriesIndex !== 1) {
-              return [val.toFixed(0) + "%"];
+              return [""];
             }
           },
         },
@@ -566,6 +835,12 @@ export default {
     footerFB,
     footerRadiusBalls,
   },
+  beforeDestroy() {
+    if (this.wave) {
+      this.stopAudio();
+      this.wave.destroy();
+    }
+  },
   mounted() {
     setTimeout(() => {
       var audio = document.getElementById("audio");
@@ -578,88 +853,93 @@ export default {
     },
     show(value) {
       if (value === "section1") {
-        this.menuColor = "rgb(var(--vs-primary))";
-        this.downColor = "#fff";
+        this.menuColor = "var(--vs-primary)";
+        this.downColor = "255,255,255";
       }
       if (value === "section2") {
-        this.menuColor = "#fff";
-        this.downColor = "#fff";
-        this.upColor = "#fff";
+        this.menuColor = "255,255,255";
+        this.downColor = "255,255,255";
+        this.upColor = "255,255,255";
       }
       if (value === "section3") {
-        this.menuColor = "rgb(var(--vs-primary))";
-        this.downColor = "rgb(var(--vs-primary))";
-        this.upColor = "rgb(var(--vs-primary))";
+        this.menuColor = "var(--vs-primary)";
+        this.downColor = "var(--vs-primary)";
+        this.upColor = "var(--vs-primary)";
       }
       if (value === "section4") {
-        this.downColor = "#fff";
-        this.upColor = "rgb(var(--vs-primary))";
-        this.menuColor = "rgb(var(--vs-primary))";
-        this.audio = "audio/MIB2.mp4";
+        this.downColor = "255,255,255";
+        this.upColor = "var(--vs-primary)";
+        this.menuColor = "var(--vs-primary)";
+        this.audio = "audio/Story_1.mp3";
         this.subtitle =
           this.lang === "mm"
-            ? "http://localhost:8080/audio/mm-subtitle.vtt"
-            : "http://localhost:8080/audio/en-subtitle.vtt";
+            ? "https://www.useyourvoice2020.org/audio/Story_1_MM.vtt"
+            : "https://www.useyourvoice2020.org/audio/Story_1_EN.vtt";
         setTimeout(() => {
           this.initAudio();
-        }, 1000);
+        }, 500);
       }
       if (value === "section5") {
-        this.downColor = "#fff";
-        this.upColor = "#fff";
-        this.menuColor = "#fff";
+        this.downColor = "255,255,255";
+        this.upColor = "255,255,255";
+        this.menuColor = "255,255,255";
       }
       if (value === "section6") {
-        this.downColor = "rgb(var(--vs-primary))";
-        this.upColor = "rgb(var(--vs-primary))";
-        this.menuColor = "rgb(var(--vs-primary))";
-        this.audio = "audio/10000_hour.mp3";
+        this.downColor = "var(--vs-primary)";
+        this.upColor = "var(--vs-primary)";
+        this.menuColor = "var(--vs-primary)";
+        this.audio = "audio/Story_2.mp3";
         this.subtitle =
           this.lang === "mm"
-            ? "http://localhost:8080/audio/en-subtitle.vtt"
-            : "http://localhost:8080/audio/mm-subtitle.vtt";
+            ? "https://www.useyourvoice2020.org/audio/Story_2_MM.vtt"
+            : "https://www.useyourvoice2020.org/audio/Story_2_EN.vtt";
         setTimeout(() => {
           this.initAudio();
         }, 1000);
       }
       if (value === "section7") {
-        this.downColor = "#fff";
-        this.upColor = "#fff";
-        this.menuColor = "#fff";
+        this.downColor = "255,255,255";
+        this.upColor = "255,255,255";
+        this.menuColor = "255,255,255";
         setTimeout(() => {
           this.showChart = true;
         }, 1300);
       }
       if (value === "section8") {
-        this.downColor = "rgb(var(--vs-primary))";
-        this.upColor = "rgb(var(--vs-primary))";
-        this.menuColor = "rgb(var(--vs-primary))";
-        this.audio = "audio/MIB2.mp4";
+        this.downColor = "var(--vs-primary)";
+        this.upColor = "var(--vs-primary)";
+        this.menuColor = "var(--vs-primary)";
+        this.audio = "audio/Story_4.mp3";
         this.subtitle =
           this.lang === "mm"
-            ? "http://localhost:8080/audio/mm-subtitle.vtt"
-            : "http://localhost:8080/audio/en-subtitle.vtt";
+            ? "https://www.useyourvoice2020.org/audio/Story_4_MM.vtt"
+            : "https://www.useyourvoice2020.org/audio/Story_4_EN.vtt";
         setTimeout(() => {
           this.initAudio();
         }, 1000);
       }
       if (value === "section9") {
-        this.downColor = "#fff";
-        this.upColor = "#fff";
-        this.menuColor = "#fff";
+        this.downColor = "255,255,255";
+        this.upColor = "255,255,255";
+        this.menuColor = "255,255,255";
       }
       if (value === "section10") {
-        this.upColor = "rgb(var(--vs-primary))";
-        this.menuColor = "rgb(var(--vs-primary))";
+        this.upColor = "var(--vs-primary)";
+        this.menuColor = "var(--vs-primary)";
       }
     },
   },
   computed: {
     ...mapState(["lang"]),
   },
+  directives: {
+    ClickOutside,
+  },
   methods: {
     // Global Functions
-
+    hideToggle() {
+      this.showTooltip = false;
+    },
     swipe(e) {
       if (this.show === "section1") {
         if (e === "top") {
@@ -742,6 +1022,26 @@ export default {
       }
     },
     PlayAudio() {
+      if (this.show === "section4") {
+        this.$gtag.event("play_audio_1", {
+          event_label: "Audio Stories",
+          event_category: "play_audio",
+          non_interaction: true,
+        });
+      } else if (this.show === "section6") {
+        this.$gtag.event("play_audio_2", {
+          event_label: "Audio Stories",
+          event_category: "play_audio",
+          non_interaction: true,
+        });
+      } else if (this.show === "section8") {
+        this.$gtag.event("play_audio_4", {
+          event_label: "Audio Stories",
+          event_category: "play_audio",
+          non_interaction: true,
+        });
+      }
+
       this.showSubtitle = true;
       this.$refs.audio.play();
       this.wave.play();
@@ -755,6 +1055,14 @@ export default {
       this.showSubtitle = false;
     },
     initAudio() {
+      const loading = this.$vs.loading({
+        target: this.$refs.loading,
+        scale: "1",
+        background: "primary",
+        opacity: 1,
+        color: "#fff",
+        type: "points",
+      });
       new audioSync({
         audioPlayer: "audio", // the id of the audio tag
         subtitlesContainer: "subtitles", // the id where subtitles should show
@@ -771,6 +1079,10 @@ export default {
         this.wave.pause();
       };
       this.wave.loadAudio(this.audio);
+      this.wave.loaded = (data) => {
+        console.log("this.wave.loaded -> data", data);
+        loading.close();
+      };
     },
     // End of Global
 
@@ -786,20 +1098,91 @@ export default {
   width: 320px;
   top: 200px;
 }
-
+button#upBtn {
+  position: fixed;
+  height: 50px;
+  top: 7px;
+  width: 50px;
+  right: calc(50vw - 30px);
+  z-index: 1000;
+}
+button#downBtn {
+  position: fixed;
+  height: 50px;
+  width: 50px;
+  bottom: 30px;
+  right: calc(50vw - 30px);
+  z-index: 1000;
+}
 div#first-section {
   background: rgb(239, 239, 239);
   z-index: 1;
-  bottom: calc(100vh - 180px);
+  bottom: calc(calc(var(--vh, 1vh) * 100) - 180px);
 }
-.circle-bg img {
+.hand-div {
   width: 100vw;
   margin: 0px auto;
   position: absolute;
   bottom: 0px;
   right: calc(50% - 50vw);
 }
+.circle-bg > img {
+  width: 100vw;
+  margin: 0px auto;
+  position: absolute;
+  bottom: 0px;
+  right: calc(50% - 50vw);
+}
+.play {
+  position: absolute;
+  top: -80px;
+}
 div#third-section {
   bottom: -100px;
+}
+.ten {
+  position: relative;
+  top: -4px;
+  left: -27px;
+}
+.five {
+  position: relative;
+  top: 110px;
+}
+div#outter-chart {
+  transform: rotate(85deg);
+}
+.bg-text {
+  color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 10px;
+  background: linear-gradient(
+    180deg,
+    rgb(var(--vs-primary)) 0%,
+    rgb(var(--vs-primary), 0.2) 100%
+  );
+  padding: 0px 15px;
+  max-width: 700px;
+  width: 95%;
+  margin-left: auto;
+  margin-top: 0px;
+  margin-right: auto;
+  border-radius: 20px;
+}
+.tooltip-content {
+  position: absolute;
+  background: #fff;
+  padding: 5px;
+  border-radius: 10px;
+  width: 95vw;
+  right: 2.5vw;
+  left: 2.5vw;
+}
+.tooltip {
+  display: inline !important;
+}
+svg#female {
+  position: relative;
+  bottom: -82px;
 }
 </style>

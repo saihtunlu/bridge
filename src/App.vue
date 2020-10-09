@@ -1,20 +1,16 @@
 <template>
-  <div id="app" style="min-height: 100vh" @wheel.passive="OnWheel" class="container-fluid">
+  <div id="app" @wheel.passive="OnWheel" class="container-fluid">
     <Switcher v-if="showSwitcher" />
-    <Countdown v-if="release && !showSwitcher" />
-    <Flipper
-      :flip-key="$route.fullPath"
-      v-if="!release && !showSwitcher"
-      :spring="{ stiffness: 50, damping: 15 }"
-    >
-      <router-view :key="$route.fullPath" :scrollPosition="scroll" />
-    </Flipper>
+
+    <router-view
+      v-if="!showSwitcher"
+      :key="$route.fullPath"
+      :scrollPosition="scroll"
+    />
   </div>
 </template>
 
 <script>
-import { Flipper } from "vue-flip-toolkit";
-import Countdown from "./screens/countdown";
 import Switcher from "./screens/switcher";
 import "hooper/dist/hooper.css";
 import { mapGetters, mapState } from "vuex";
@@ -25,9 +21,13 @@ export default {
     };
   },
   components: {
-    Countdown,
     Switcher,
-    Flipper,
+  },
+  mounted() {
+    setTimeout(() => {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    }, 500);
   },
   created() {
     var cookies = document.cookie.split("; ");
@@ -35,9 +35,11 @@ export default {
     if (check) {
       var lang = check.split("=")[1];
       this.$store.commit("setLang", lang);
+      this.changeFont(lang);
       this.$store.commit("setShowSwitcher", false);
       this.$i18n.locale = lang;
     } else {
+      this.changeFont("mm");
       this.$store.commit("setShowSwitcher", true);
     }
 
@@ -47,12 +49,26 @@ export default {
   },
   computed: {
     ...mapGetters({}),
-    ...mapState(["release", "showSwitcher"]),
+    ...mapState(["showSwitcher", "lang"]),
     key() {
       return this.$route.path;
     },
   },
+  watch: {
+    lang(Value) {
+      this.changeFont(Value);
+    },
+  },
   methods: {
+    changeFont(Value) {
+      if (Value === "mm") {
+        document.getElementsByTagName("body")[0].style.fontFamily =
+          "Padauk,sans-serif";
+      } else if (Value === "en") {
+        document.getElementsByTagName("body")[0].style.fontFamily =
+          "Nunito,sans-serif";
+      }
+    },
     OnWheel(event) {
       const deltaY = event.deltaY;
       if (deltaY > 0) {

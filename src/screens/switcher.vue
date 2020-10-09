@@ -1,8 +1,11 @@
 <template>
   <div class="row" id="sitcher">
-    <div class="col-12 p-0 flex-x-between flex-column" style="height:100vh;overflow:hidden">
+    <div
+      class="col-12 p-0 flex-x-between flex-column"
+      style="height:100vh;overflow:hidden"
+    >
       <div class="upper-div flex-center">
-        <img src="/image/loading-logo.gif" class="mt-5" width="265px" alt />
+        <img src="/image/loading.gif" class="mt-5" width="265px" alt />
       </div>
       <div class="footer-radius-switcher animated primary-bg bounceInUp">
         <div
@@ -10,10 +13,11 @@
           style="border-bottom-left-radius: 50% 45% !important;border-bottom-right-radius: 50% 45% !important;"
         ></div>
         <div
-          class="bottom-div flex primary-bg"
-          style="justify-content:center;align-items: flex-start;"
+          class="bottom-div  flex-column primary-bg"
+          style="justify-content:flex-start;align-items:center;"
         >
-          <Lang class="mt-5" />
+          <p class="text white py-0 text-center">{{ $t("chooseLanguage") }}</p>
+          <Lang class="mt-0" />
         </div>
       </div>
     </div>

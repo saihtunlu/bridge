@@ -2,7 +2,7 @@
   <div class="row">
     <MenuBtn />
     <div class="flex-end w-100 side-padding">
-      <img src="/image/logo.png" width="200px" alt />
+      <img src="/image/logo.png" class="mt-3" width="200px" alt />
     </div>
     <div class="walls-table w-100 mx-5">
       <vs-table>
@@ -11,25 +11,21 @@
         </template>
         <template #thead>
           <vs-tr>
-            <vs-th sort @click="posts = $vs.sortData($event, posts, 'text')">
-              Text Content
-            </vs-th>
-
-            <vs-th sort @click="posts = $vs.sortData($event, posts, 'name')">
-              Name
-            </vs-th>
+            <vs-th sort @click="posts = $vs.sortData($event, posts, 'text')"
+              >Text Content</vs-th
+            >
+            <vs-th sort @click="posts = $vs.sortData($event, posts, 'name')"
+              >Name</vs-th
+            >
             <vs-th
               sort
               @click="posts = $vs.sortData($event, posts, 'created_at')"
+              >Posted Date</vs-th
             >
-              Posted Date
-            </vs-th>
-            <vs-th sort @click="posts = $vs.sortData($event, posts, 'image')">
-              Choosen Image
-            </vs-th>
-            <vs-th>
-              Actions
-            </vs-th>
+            <vs-th sort @click="posts = $vs.sortData($event, posts, 'image')"
+              >Choosen Image</vs-th
+            >
+            <vs-th>Actions</vs-th>
           </vs-tr>
         </template>
         <template #tbody>
@@ -42,21 +38,15 @@
             )"
             :data="tr"
           >
-            <vs-td>
-              {{ tr.text }}
-            </vs-td>
-            <vs-td>
-              {{ tr.name }}
-            </vs-td>
-            <vs-td>
-              {{ tr.created_at }}
-            </vs-td>
+            <vs-td>{{ tr.text }}</vs-td>
+            <vs-td>{{ tr.name }}</vs-td>
+            <vs-td>{{ tr.created_at }}</vs-td>
             <vs-td>
               <img
                 :src="tr.image"
                 width="100px"
-                style="border-radius:5px"
-                alt=""
+                style="border-radius: 5px"
+                alt
               />
             </vs-td>
 
@@ -74,12 +64,12 @@
                   stroke-linejoin="round"
                   class="feather feather-trash-2"
                 >
-                  <polyline points="3 6 5 6 21 6"></polyline>
+                  <polyline points="3 6 5 6 21 6" />
                   <path
                     d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                  ></path>
-                  <line x1="10" y1="11" x2="10" y2="17"></line>
-                  <line x1="14" y1="11" x2="14" y2="17"></line>
+                  />
+                  <line x1="10" y1="11" x2="10" y2="17" />
+                  <line x1="14" y1="11" x2="14" y2="17" />
                 </svg>
                 Remove
               </vs-button>
@@ -104,18 +94,16 @@
       v-model="active"
     >
       <div class="con-content flex-center">
-        <p class="sm-text">
-          Are you sure to remove this post?
-        </p>
+        <p class="sm-text">Are you sure to remove this post?</p>
       </div>
       <template #footer>
         <div class="con-footer">
           <div class="flex-center">
             <vs-button ref="button" danger @click="deletePost()" transparent>
-              <p class="my-0 ">Yes</p>
+              <p class="my-0">Yes</p>
             </vs-button>
             <vs-button @click="active = false" dark transparent>
-              <p class="my-0 ">No, thanks!</p>
+              <p class="my-0">No, thanks!</p>
             </vs-button>
           </div>
         </div>

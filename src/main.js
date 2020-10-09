@@ -4,17 +4,28 @@ import store from "./store";
 import router from "./router";
 import axios from "./axios";
 Vue.prototype.$axios = axios;
+import VueGtag from "vue-gtag";
+Vue.use(
+  VueGtag,
+  {
+    config: { id: "UA-179472785-1" },
+    pageTrackerTemplate(to) {
+      return {
+        page_title: to.name,
+        page_path: to.path,
+      };
+    },
+  },
+  router
+);
+
+import VueHtml2Canvas from "vue-html2canvas";
+Vue.use(VueHtml2Canvas);
 //import css
 import "./assets/css/responsive.css";
 import "./assets/css/animation.css";
 import "./assets/css/main.css";
 import "hooper/dist/hooper.css";
-
-import Vue2TouchEvents from "vue2-touch-events";
-Vue.use(Vue2TouchEvents, {
-  tapTolerance: 100,
-  swipeTolerance: 100,
-});
 
 import Vuesax from "vuesax";
 import "vuesax/dist/vuesax.css"; //Vuesax styles
@@ -30,12 +41,6 @@ Vue.component("apexchart", VueApexCharts);
 
 import Transitions from "vue2-transitions";
 Vue.use(Transitions);
-
-// import VirtualCollection from "vue-virtual-collection";
-// Vue.use(VirtualCollection);
-
-import vueAwesomeCountdown from "vue-awesome-countdown";
-Vue.use(vueAwesomeCountdown, "vac");
 
 //languages
 import i18n from "./i18n";
