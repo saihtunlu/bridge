@@ -8,7 +8,7 @@ import VueGtag from "vue-gtag";
 Vue.use(
   VueGtag,
   {
-    config: { id: "UA-179472785-1" },
+    config: { id: "UA-180168494-1" },
     pageTrackerTemplate(to) {
       return {
         page_title: to.name,

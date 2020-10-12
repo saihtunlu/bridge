@@ -5,7 +5,7 @@
       style="height:100vh;overflow:hidden"
     >
       <div class="upper-div flex-center">
-        <img src="/image/loading.gif" class="mt-5" width="265px" alt />
+        <img src="/image/logo.gif" class="mt-5" width="265px" alt />
       </div>
       <div class="footer-radius-switcher animated primary-bg bounceInUp">
         <div

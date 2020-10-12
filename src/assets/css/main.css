@@ -121,12 +121,7 @@ div#balls {
   align-items: center;
   justify-content: center;
 }
-.roll5 {
-  background: url("../../../public/image/roll5-bg.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 10% 0%;
-}
+
 .roll6-content {
   height: calc(var(--vh, 1vh) * 100) !important;
   z-index: 998;
@@ -586,24 +581,6 @@ section.inner-hooper .hooper-pagination {
   padding-bottom: 30px !important;
   position: relative;
   margin-top: -35px;
-}
-
-.sec-section1 {
-  background: url("../../../public/image/roll2-bg.png");
-  height: calc(100% + 35px);
-  width: 100%;
-  margin-top: -35px;
-  position: relative;
-  background-position: bottom;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-}
-.roll7 {
-  background: url("../../../public/image/roll7-bg.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 86% 0%;
 }
 
 /* ------------------------------------------------'tablet'------------------------------------------------ */

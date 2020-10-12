@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row ">
     <MenuBtn />
     <div class="flex-end w-100 side-padding">
       <img src="/image/logo.png" class="mt-3" width="200px" alt />
@@ -16,6 +16,9 @@
             >
             <vs-th sort @click="posts = $vs.sortData($event, posts, 'name')"
               >Name</vs-th
+            >
+                   <vs-th sort @click="posts = $vs.sortData($event, posts, 'name')"
+              >Occupation</vs-th
             >
             <vs-th
               sort
@@ -39,7 +42,8 @@
             :data="tr"
           >
             <vs-td>{{ tr.text }}</vs-td>
-            <vs-td>{{ tr.name }}</vs-td>
+            <vs-td>{{ separate(tr.name)[0] }}</vs-td>
+            <vs-td>{{ separate(tr.name)[1] }}</vs-td>
             <vs-td>{{ tr.created_at }}</vs-td>
             <vs-td>
               <img
@@ -128,9 +132,15 @@ export default {
   },
   methods: {
     getPosts() {
+        const loading = this.$vs.loading()
       this.$axios.get("all-posts/").then((response) => {
         this.posts = response.data;
+         loading.close()
       });
+    },
+    separate(text){
+      var array = text.split(",");
+      return array;
     },
     selectPost(id, index) {
       this.deleteId = id;

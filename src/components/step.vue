@@ -460,7 +460,8 @@
                 {{ text }}
               </p> -->
               <img :src="textImage" width="100%" />
-              <p
+              <img :src="nameImage" width="100%" />
+              <!-- <p
                 style="
                   font-size: 12px !important;
                   margin-bottom: 0px !important;
@@ -468,7 +469,7 @@
                 "
               >
                 {{ name }}
-              </p>
+              </p> -->
             </div>
           </div>
         </div>
@@ -561,7 +562,7 @@
           <a
             @click="
               detectShare(
-                'https://data.useyourvoice2020.org/' + newPost.screenshot
+                'https://just.useyourvoice2020.org/' + newPost.screenshot
               )
             "
             id="shareFb"
@@ -735,6 +736,7 @@ export default {
       file: null,
       fbLink: null,
       newPost: {},
+      nameImage:null,
       textImage: null,
     };
   },
@@ -753,6 +755,7 @@ export default {
       } else {
         if (data === "step4") {
           this.changeText(this.text);
+          this.changeName(this.name);
         }
         this.$emit("bgColor", "white");
       }
@@ -877,6 +880,22 @@ export default {
         .then((dataUri) => {
           this.textImage = dataUri;
         });
+    }, changeName(text) {
+      const textToImage = require("text-to-image");
+      textToImage
+        .generate(text, {
+          maxWidth: 1000,
+          fontSize: 50,
+          textAlign: "center",
+          lineHeight: 75,
+          fontFamily: "Padauk",
+          bgColor: "transparent",
+          margin: 0,
+          textColor: "#fff",
+        })
+        .then((dataUri) => {
+          this.nameImage = dataUri;
+        });
     },
     async Post() {
       const loading = this.$vs.loading({
@@ -923,7 +942,7 @@ export default {
         non_interaction: true,
       });
       window.open(
-        "https://data.useyourvoice2020.org/" + this.newPost.screenshot,
+        "https://just.useyourvoice2020.org/" + this.newPost.screenshot,
         "_blank"
       );
       var download = document.createElement("a");
