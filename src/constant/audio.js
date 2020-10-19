@@ -1,166 +1,102 @@
 const mm = [
   {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "အသံဖိုင်1",
+    file: "stories_contents/Story_1.mp3",
+    subtitle:
+      "https://www.useyourvoice2020.org/stories_contents/Story_1_MM.vtt",
+    name: "လွှတ်တော်ကိုယ်စားလှယ်လောင်း - ၁",
   },
   {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "အသံဖိုင်2",
+    file: "stories_contents/Story_2.mp3",
+    subtitle:
+      "https://www.useyourvoice2020.org/stories_contents/Story_2_MM.vtt",
+    name: "လွှတ်တော်ကိုယ်စားလှယ်လောင်း - ၂",
   },
   {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "အသံဖိုင်3",
+    file: "stories_contents/Story_3.mp3",
+    subtitle:
+      "https://www.useyourvoice2020.org/stories_contents/Story_3_MM.vtt",
+    name: "လွှတ်တော်ကိုယ်စားလှယ်လောင်း - ၃",
   },
   {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "အသံဖိုင်4",
+    file: "stories_contents/Story_4.mp3",
+    subtitle:
+      "https://www.useyourvoice2020.org/stories_contents/Story_4_MM.vtt",
+    name: "လွှတ်တော်ကိုယ်စားလှယ်လောင်း - ၄",
   },
   {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "အသံဖိုင်5",
+    file: "stories_contents/Story_5.mp3",
+    subtitle:
+      "https://www.useyourvoice2020.org/stories_contents/Story_5_MM.vtt",
+    name: "လွှတ်တော်ကိုယ်စားလှယ်လောင်း - ၅",
   },
   {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "အသံဖိုင်6",
+    file: "stories_contents/Story_6.mp3",
+    subtitle:
+      "https://www.useyourvoice2020.org/stories_contents/Story_6_MM.vtt",
+    name: "လွှတ်တော်ကိုယ်စားလှယ်လောင်း - ၆",
   },
   {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "အသံဖိုင်7",
+    file: "stories_contents/Story_7.mp3",
+    subtitle:
+      "https://www.useyourvoice2020.org/stories_contents/Story_7_MM.vtt",
+    name: "လွှတ်တော်ကိုယ်စားလှယ်လောင်း - ၇",
   },
   {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "အသံဖိုင်8",
-  },
-  {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "အသံဖိုင်9",
-  },
-  {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "အသံဖိုင်10",
-  },
-  {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "အသံဖိုင်11",
-  },
-  {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "အသံဖိုင်12",
-  },
-  {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "အသံဖိုင်13",
-  },
-  {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "အသံဖိုင်14",
-  },
-  {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "အသံဖိုင်15",
-  },
-  {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "အသံဖိုင်16",
+    file: "stories_contents/Story_8.mp3",
+    subtitle:
+      "https://www.useyourvoice2020.org/stories_contents/Story_8_MM.vtt",
+    name: "လွှတ်တော်ကိုယ်စားလှယ်လောင်း - ၈",
   },
 ];
 
 const en = [
   {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "audio1",
+    file: "stories_contents/Story_1.mp3",
+    subtitle:
+      "https://www.useyourvoice2020.org/stories_contents/Story_1_Eng.vtt",
+    name: "2015 Woman Candidate: Story 1",
   },
   {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "audio2",
+    file: "stories_contents/Story_2.mp3",
+    subtitle:
+      "https://www.useyourvoice2020.org/stories_contents/Story_2_Eng.vtt",
+    name: "2015 Woman Candidate: Story 2",
   },
   {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "audio3",
+    file: "stories_contents/Story_3.mp3",
+    subtitle:
+      "https://www.useyourvoice2020.org/stories_contents/Story_3_Eng.vtt",
+    name: "2015 Woman Candidate: Story 3",
   },
   {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "audio4",
+    file: "stories_contents/Story_4.mp3",
+    subtitle:
+      "https://www.useyourvoice2020.org/stories_contents/Story_4_Eng.vtt",
+    name: "2015 Woman Candidate: Story 4",
   },
   {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "audio5",
+    file: "stories_contents/Story_5.mp3",
+    subtitle:
+      "https://www.useyourvoice2020.org/stories_contents/Story_5_Eng.vtt",
+    name: "2015 Woman Candidate: Story 5",
   },
   {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "audio6",
+    file: "stories_contents/Story_6.mp3",
+    subtitle:
+      "https://www.useyourvoice2020.org/stories_contents/Story_6_Eng.vtt",
+    name: "2015 Woman Candidate: Story 6",
   },
   {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "audio7",
+    file: "stories_contents/Story_7.mp3",
+    subtitle:
+      "https://www.useyourvoice2020.org/stories_contents/Story_7_Eng.vtt",
+    name: "2015 Woman Candidate: Story 7",
   },
   {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "audio8",
-  },
-  {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "audio9",
-  },
-  {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "audio10",
-  },
-  {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "audio11",
-  },
-  {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "audio12",
-  },
-  {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "audio13",
-  },
-  {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "audio14",
-  },
-  {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "audio15",
-  },
-  {
-    file: "audio/10000_hour.mp3",
-    subtitle: "https://staging.ourvoicesmatter2020.com/subtitle/en.vtt",
-    name: "audio16",
+    file: "stories_contents/Story_8.mp3",
+    subtitle:
+      "https://www.useyourvoice2020.org/stories_contents/Story_8_Eng.vtt",
+    name: "2015 Woman Candidate: Story 8",
   },
 ];
 

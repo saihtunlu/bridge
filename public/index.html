@@ -66,8 +66,12 @@
     </div>
 
     <script src="./js/circular-wave.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/myanmar-tools/1.2.1/zawgyi_detector.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/myanmar-tools/1.2.1/zawgyi_converter.min.js"></script>
     <script>
       window.CircularAudioWave = CircularAudioWave;
+      window.ZawgyiDetector = new google_myanmar_tools.ZawgyiDetector();
+      window.ZawgyiConverter = new google_myanmar_tools.ZawgyiConverter();
     </script>
     <script>
       window.fbAsyncInit = function() {

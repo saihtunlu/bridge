@@ -144,12 +144,11 @@ import MenuBtn from "./menu";
 
 import { isTablet, isBrowser, isMobileOnly } from "mobile-device-detect";
 export default {
-  name: "App",
   data() {
     return {
       post: {},
       sharingPost: false,
-      active: false,
+      active: true,
       line: "30",
       margin: 0,
       color: "white",
@@ -164,7 +163,6 @@ export default {
   },
   created() {},
   mounted() {
-    this.active = this.$route.params.show;
     var imageUrl = this.$route.query.image;
     console.log(imageUrl);
     if (isMobileOnly) {

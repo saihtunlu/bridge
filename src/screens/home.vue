@@ -1022,6 +1022,7 @@ export default {
       }
     },
     PlayAudio() {
+      var time = 1600;
       if (this.show === "section4") {
         this.$gtag.event("play_audio_1", {
           event_label: "Audio Stories",
@@ -1040,12 +1041,14 @@ export default {
           event_category: "play_audio",
           non_interaction: true,
         });
+        time = 400;
       }
-
-      this.showSubtitle = true;
-      this.$refs.audio.play();
       this.wave.play();
       this.play = true;
+      setTimeout(() => {
+        this.showSubtitle = true;
+        this.$refs.audio.play();
+      }, time);
     },
     stopAudio() {
       this.$refs.audio.pause();
@@ -1079,16 +1082,10 @@ export default {
         this.wave.pause();
       };
       this.wave.loadAudio(this.audio);
-      this.wave.loaded = (data) => {
-        console.log("this.wave.loaded -> data", data);
+      this.wave.loaded = () => {
         loading.close();
       };
     },
-    // End of Global
-
-    // Section 1
-
-    // end of section 1
   },
 };
 </script>

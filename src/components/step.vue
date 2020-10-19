@@ -434,17 +434,18 @@
               <div
                 class="flex-x-between card-logo"
                 style="
+                  width: 275px !important;
                   padding-right: 12px !important;
                   padding-left: 12px !important;
                 "
               >
                 <img src="image/logo.png" width="100px" alt />
-                <p class="primary xs-text" style="font-size: 11px !important">
+                <span class="primary xs-text" style="font-size:11px!important">
                   useyourvoice2020.org
-                </p>
+                </span>
               </div>
               <img
-                :src="selectedImage"
+                :src="checkSelectedImage"
                 style="width: 100% !important; height: auto"
                 alt
               />
@@ -456,20 +457,8 @@
                 padding-bottom: 12px !important;
               "
             >
-              <!-- <p style="font-size: 16px !important; margin: 0px !important">
-                {{ text }}
-              </p> -->
               <img :src="textImage" width="100%" />
               <img :src="nameImage" width="100%" />
-              <!-- <p
-                style="
-                  font-size: 12px !important;
-                  margin-bottom: 0px !important;
-                  margin-top: 3px !important;
-                "
-              >
-                {{ name }}
-              </p> -->
             </div>
           </div>
         </div>
@@ -703,11 +692,11 @@
 <script>
 const images = [
   "image/wall (1).png",
-  "image/wall (2).svg",
+  "image/wall-(2).png",
   "image/wall (3).png",
   "image/wall (4).png",
   "image/wall (5).png",
-  "image/wall (6).svg",
+  "image/wall-(6).png",
   "image/wall (7).png",
   "image/wall (8).png",
   "image/wall (9).png",
@@ -865,25 +854,28 @@ export default {
       }
     },
     changeText(text) {
+      var result=this.ZawgyiChecker(text);
       const textToImage = require("text-to-image");
       textToImage
-        .generate(text, {
+        .generate(result, {
           maxWidth: 1000,
           fontSize: 60,
           textAlign: "center",
           lineHeight: 100,
           fontFamily: "Padauk",
           bgColor: "transparent",
-          margin: 15,
+          margin: 0,
           textColor: "#fff",
         })
         .then((dataUri) => {
           this.textImage = dataUri;
         });
-    }, changeName(text) {
+    }, 
+    changeName(text) {
+       var result=this.ZawgyiChecker(text);
       const textToImage = require("text-to-image");
       textToImage
-        .generate(text, {
+        .generate(result, {
           maxWidth: 1000,
           fontSize: 50,
           textAlign: "center",
@@ -896,6 +888,16 @@ export default {
         .then((dataUri) => {
           this.nameImage = dataUri;
         });
+    },
+    ZawgyiChecker(text){
+      var result=text;
+            const detector =window.ZawgyiDetector;
+      const check = detector.getZawgyiProbability(text);
+     if(check >0.95){
+       const converter = window.ZawgyiConverter;
+      result = converter.zawgyiToUnicode(text);
+     }
+     return result;
     },
     async Post() {
       const loading = this.$vs.loading({

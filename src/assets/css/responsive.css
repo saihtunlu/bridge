@@ -32,8 +32,11 @@ html {
 /* width */
 *::-webkit-scrollbar {
   width: 3px;
-  height: 1px;
+  height: 6px;
   display: none !important;
+}
+*:hover::-webkit-scrollbar {
+  height: 6px;
 }
 .show-scroll::-webkit-scrollbar,
 .show-scroll::-webkit-scrollbar-thumb {
@@ -48,10 +51,13 @@ html {
 }
 /* Handle */
 *::-webkit-scrollbar-thumb {
-  background: rgb(var(--vs-primary));
+  background: rgb(0, 0, 0, 0.2);
   border-radius: 200px !important;
   max-height: 10px !important;
   display: none !important;
+}
+*:hover::-webkit-scrollbar-thumb {
+  background: rgb(var(--vs-primary));
 }
 /* Handle on hover */
 *:hover::-webkit-scrollbar-thumb {

@@ -1,81 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <style>
-      .active {
-        display: block !important;
-      }
-      .hide {
-        display: none !important;
-      }
-    </style>
-
     <script>
       $(document).ready(function() {
-        $(".liquorbox a ").click(function(e) {
-          $(".liquorbox a ").removeClass("activelink");
-          $(this).addClass("activeTab");
-          var tagid = $(this).attr("id");
+        // set data
+        var Course = [
+          {
+            name: "Java",
+            id: 1,
+            price: 45000,
+          },
+          {
+            name: "Python",
+            id: 2,
+            price: 50000,
+          },
+          {
+            name: "Javascript",
+            id: 3,
+            price: 55000,
+          },
+        ];
 
-          $(".bottles")
-            .removeClass("active")
-            .addClass("hide");
-          $("." + tagid)
-            .addClass("active")
-            .removeClass("hide");
+        var Batch = [
+          {
+            name: "Java - 1",
+            course_id: 1,
+            fee: 300000,
+            id: 1,
+          },
+          {
+            name: "Java - 2",
+            course_id: 1,
+            fee: 320000,
+            id: 2,
+          },
+          {
+            name: "Java - 3",
+            course_id: 1,
+            fee: 320000,
+            id: 3,
+          },
+          {
+            name: "Python - 1",
+            course_id: 2,
+            fee: 400000,
+            id: 4,
+          },
+          {
+            name: "Python - 2",
+            course_id: 2,
+            fee: 400000,
+            id: 5,
+          },
+          {
+            name: "Python - 3",
+            course_id: 2,
+            fee: 400000,
+            id: 6,
+          },
+          {
+            name: "Javascript - 1",
+            course_id: 3,
+            fee: 450000,
+            id: 7,
+          },
+          {
+            name: "Javascript - 2",
+            course_id: 3,
+            fee: 450000,
+            id: 8,
+          },
+        ];
 
-          $("html, body")
-            .stop()
-            .animate(
-              {
-                scrollTop: $("#bottle").offset().top,
-              },
-              500,
-              "linear"
-            );
+        // actions
+        $("#course").change(function() {
+          $("#batch").html("");
+          var selectedBatch = Batch.filter((data) => {
+            return data.course_id === parseInt(this.value);
+          });
+          selectedBatch.forEach((data) => {
+            var value = `<option value="${data.id}">${data.name}</option>`;
+            $("#batch").append(value);
+          });
         });
+
+        $("#batch").change(function() {
+          var selectedBatch = Batch.filter((data) => {
+            return data.id === parseInt(this.value);
+          })[0];
+          console.log("selectedBatch", selectedBatch);
+        });
+
+        // mounted
+        setCourseValue();
+
+        // Methods
+        function setCourseValue() {
+          Course.forEach((data) => {
+            var value = `<option value="${data.id}">${data.name}</option>`;
+            $("#course").append(value);
+          });
+        }
       });
     </script>
   </head>
   <body>
-    <style>
-      .liquorSelector {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .liquorbox {
-        width: 20%;
-        padding: 5px 15px;
-        text-align: center;
-        background-color: #e11111;
-        border-radius: 5px;
-        margin-left: 5px;
-      }
-      .liquorbox a {
-        text-decoration: none;
-        color: #fff;
-      }
-    </style>
-    <div class="liquorSelector" centered>
-      <div class="liquorbox">
-        <a class="liquor_all" id="all">All</a>
-      </div>
-      <div class="liquorbox">
-        <a class="liquor_premium" id="premium">Premium</a>
-      </div>
-      <div class="liquorbox">
-        <a class="liquor_standard" id="standard">Standard</a>
-      </div>
-
-      <div class="all bottles">all</div>
-      <div class="premium bottles">premium</div>
-      <div class="standard bottles">standard</div>
+    <div style="display:flex;align-items:center;">
+      <p>Course Name :</p>
+      <select name="Course" id="course"></select>
+      <select name="Batch" id="batch"></select>
     </div>
   </body>
 </html>

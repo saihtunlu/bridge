@@ -59,19 +59,19 @@
           </svg>
           <img src="/image/white-logo.svg" class="logo" width="220px" alt />
         </div>
-        <p class="white text my-0 pointer" @click="changeRoute('Home')">
+        <a class="white text my-0 pointer" href="/">
           {{ $t("home") }}
-        </p>
+        </a>
         <div class="divider"></div>
-        <p class="white text my-0 pointer" @click="changeRoute('Wall')">
+        <a class="white text my-0 pointer" href="/wall-of-support">
           {{ $t("wall") }}
-        </p>
+        </a>
         <!-- <div class="divider"></div>
-        <p class="white text mt-0 pointer">{{ $t("detail") }}</p>-->
-        <!-- <div class="divider"></div>
-        <p class="white text mt-0 pointer" @click="changeRoute('Stories')">
+        <p class="white text mt-0 pointer">{{ $t("detail") }}</p> -->
+        <div class="divider"></div>
+        <a class="white text mt-0 pointer" href="/stories">
           {{ $t("stories") }}
-        </p> -->
+        </a>
         <div class="divider" v-if="LoggedIn"></div>
         <p class="white text mt-0 pointer" v-if="LoggedIn" @click="logout">
           {{ $t("Logout") }}
