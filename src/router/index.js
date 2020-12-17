@@ -7,6 +7,7 @@ import Home from "../screens/home.vue";
 import Admin from "../screens/admin.vue";
 import Login from "../screens/login.vue";
 import Stories from "../screens/stories.vue";
+import Faq from "../screens/faq.vue";
 
 const routes = [
   {
@@ -23,6 +24,11 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+  },
+  {
+    path: "/faq",
+    name: "Faq",
+    component: Faq,
   },
   {
     path: "/admin",

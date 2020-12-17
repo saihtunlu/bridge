@@ -855,6 +855,7 @@ export default {
     },
     changeText(text) {
       var result=this.ZawgyiChecker(text);
+      this.text=result;
       const textToImage = require("text-to-image");
       textToImage
         .generate(result, {
@@ -873,6 +874,7 @@ export default {
     }, 
     changeName(text) {
        var result=this.ZawgyiChecker(text);
+       this.name=result;
       const textToImage = require("text-to-image");
       textToImage
         .generate(result, {

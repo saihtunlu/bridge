@@ -360,6 +360,7 @@ button#floatingBtn .vs-button__content {
 div#app {
   background: #efefef !important;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 .primaryHover:hover {
   box-shadow: 0px 4px 25px -8px rgba(var(--vs-primary), 0.2);
@@ -424,6 +425,12 @@ span.mark {
   transform: none !important;
 }
 @media screen and (max-height: 660px) {
+  .vsa-item__content,
+  .faq-padding,
+  button.vsa-item__trigger {
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+  }
   .male {
     position: relative;
     top: -50px !important;
@@ -432,6 +439,9 @@ span.mark {
   svg#female {
     position: relative;
     bottom: -72px;
+  }
+  .text-title {
+    font-size: 18px !important;
   }
   .text {
     font-size: 14px !important;
@@ -528,6 +538,9 @@ span.mark {
     font-size: 19px !important;
     font-weight: bold !important;
   }
+  .text-title {
+    font-size: 22px !important;
+  }
   .sm-text,
   .vs-tooltip,
   .input-text {
@@ -547,6 +560,12 @@ span.mark {
     min-width: calc(100vw - 40px) !important;
     max-width: calc(100vw - 40px) !important;
     margin: auto;
+  }
+  .vsa-item__content,
+  .faq-padding,
+  button.vsa-item__trigger {
+    padding-left: 25px !important;
+    padding-right: 25px !important;
   }
 }
 .roll8-content {
@@ -585,6 +604,12 @@ section.inner-hooper .hooper-pagination {
 
 /* ------------------------------------------------'tablet'------------------------------------------------ */
 @media screen and (min-width: 600px) and (max-width: 992px) {
+  .vsa-item__content,
+  .faq-padding,
+  button.vsa-item__trigger {
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+  }
   .cart-text {
     font-size: 16px !important;
   }
@@ -627,6 +652,9 @@ section.inner-hooper .hooper-pagination {
     font-size: 24px !important;
     font-weight: bold !important;
   }
+  .text-title {
+    font-size: 27px !important;
+  }
   .sm-text,
   .vs-tooltip {
     font-size: 20px !important;
@@ -642,6 +670,12 @@ section.inner-hooper .hooper-pagination {
 
 /* ------------------------------------------------"desktop"------------------------------------------------ */
 @media (min-width: 992px) {
+  .vsa-item__content,
+  .faq-padding,
+  button.vsa-item__trigger {
+    padding-left: 35px !important;
+    padding-right: 35px !important;
+  }
   #editPost .con-content {
     width: 600px;
   }
@@ -650,6 +684,9 @@ section.inner-hooper .hooper-pagination {
   }
   .cart-sm-text {
     font-size: 12px !important;
+  }
+  .text-title {
+    font-size: 23px !important;
   }
   .tooltip-content {
     max-width: 700px !important;

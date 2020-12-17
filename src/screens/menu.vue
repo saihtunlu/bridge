@@ -72,6 +72,10 @@
         <a class="white text mt-0 pointer" href="/stories">
           {{ $t("stories") }}
         </a>
+        <div class="divider"></div>
+        <a class="white text mt-0 pointer" href="/faq">
+          {{ $t("faq") }}
+        </a>
         <div class="divider" v-if="LoggedIn"></div>
         <p class="white text mt-0 pointer" v-if="LoggedIn" @click="logout">
           {{ $t("Logout") }}

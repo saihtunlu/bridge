@@ -182,6 +182,7 @@ export default {
     ...mapState(["posts", "page", "getting"]),
     ...mapGetters(["hasNext"]),
   },
+
   methods: {
     Toggle() {
       this.active = !this.active;

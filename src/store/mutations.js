@@ -3,6 +3,7 @@ export default {
     data.forEach((post) => {
       state.posts.push(post);
     });
+    state.getting = false;
   },
   setRelease(state, data) {
     state.release = data;

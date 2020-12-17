@@ -9,7 +9,7 @@
       class="wall-container"
       ref="walls"
       :style="containerStyle"
-      style="padding-bottom: 170px;"
+      style="padding-bottom: 170px"
     >
       <div
         v-for="(item, index) in items"
@@ -27,6 +27,7 @@
 <script>
 import { dragscroll } from "vue-dragscroll";
 import { isBrowser } from "mobile-device-detect";
+import { mapState } from "vuex";
 export default {
   props: {
     isAdded: {
@@ -59,6 +60,14 @@ export default {
       },
     },
   },
+  computed: {
+    ...mapState(["getting"]),
+    containerStyle() {
+      return {
+        width: this.width * this.col + this.margin * this.col * 2 + "px",
+      };
+    },
+  },
   directives: {
     dragscroll: dragscroll,
   },
@@ -77,7 +86,8 @@ export default {
     onScroll() {
       if (
         this.$refs.outer.scrollHeight - this.$refs.outer.clientHeight - 200 <
-        this.$refs.outer.scrollTop
+          this.$refs.outer.scrollTop &&
+        !this.getting
       ) {
         this.$emit("reachBottom");
       }
@@ -92,13 +102,6 @@ export default {
     setTimeout(() => {
       this.scrollToMiddle();
     }, 10);
-  },
-  computed: {
-    containerStyle() {
-      return {
-        width: this.width * this.col + this.margin * this.col * 2 + "px",
-      };
-    },
   },
 };
 </script>
