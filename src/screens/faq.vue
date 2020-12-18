@@ -202,7 +202,9 @@ button.vsa-item__trigger {
   display: none !important;
 }
 .vsa-item svg.left {
+  transform: rotate(90deg);
   display: none;
+  margin-right: 4px;
 }
 .vsa-list {
   background-color: transparent !important;
